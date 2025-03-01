@@ -1,4 +1,4 @@
-import userValidationSchema from "../../middleware/userJoiValid.js";
+import userValidationSchema from "../../utils/userJoiValid.js";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import UserModel from "../../model/userModel.js";
@@ -11,7 +11,7 @@ export const UserRegister = async (req,res) => {
 
 
  const {error} = userValidationSchema.validate(req.body)
-
+ 
  if(error){
     return res.status(400).json({success:false,message:error.details[0].message})
  }
@@ -20,7 +20,7 @@ export const UserRegister = async (req,res) => {
 
         const {username,password,email} = req.body
 
-        const userExist = await new UserModel.findOne({email:email})
+        const userExist = await UserModel.findOne({email:email})
 
         if(userExist){
           return  res.status( 400).json({success:false,message:"Email Already Exist"})
@@ -39,7 +39,7 @@ export const UserRegister = async (req,res) => {
 
         const userData = await userSave.save()
 
-        const token =  jwt.sign({userId:userData._id,userEmail:accountExist.email},process.env.JWTSECRECT);
+        const token =  jwt.sign({userId:userData._id,userEmail:userExist.email},process.env.JWTSECRECT);
         
  
         res.cookie("token",token,{

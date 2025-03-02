@@ -11,9 +11,6 @@
             'string.min': ' content should have at least 20 characters',
             'any.required': 'content is required',
         }),
-        image:Joi.string().required().messages({
-            'any.required': 'image is required',
-        }),
         author:Joi.string().hex().length(24),
         createdAt:Joi.date(),
         updatedAt:Joi.date(),

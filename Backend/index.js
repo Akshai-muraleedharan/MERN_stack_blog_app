@@ -3,12 +3,20 @@
     import v1Router from "./routes/index.js"
     import dbConnect from "./config/db.js"
     import cookieParser from "cookie-parser"
+    import cors from "cors"
+
 
     const app = express()
-    
+
+
+    const corsOption = {
+        origin:"http://localhost:5173",
+        credentials:true
+    }
 
     app.use(express.json())
     app.use(cookieParser())
+    app.use(cors(corsOption))
 
     const port = process.env.PORT || 4000
     

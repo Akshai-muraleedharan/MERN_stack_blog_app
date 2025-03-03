@@ -1,4 +1,4 @@
-import userValidationSchema from "../../utils/userJoiValid.js";
+import { userLoginJoiValid, userValidationSchema } from "../../utils/userJoiValid.js";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import UserModel from "../../model/userModel.js";
@@ -9,16 +9,15 @@ import UserModel from "../../model/userModel.js";
 
 export const UserRegister = async (req,res) => {
 
-
- const {error} = userValidationSchema.validate(req.body)
- 
- if(error){
-    return res.status(400).json({success:false,message:error.details[0].message})
- }
-
     try {
 
-        const {username,password,email} = req.body
+      const {error,value} = userValidationSchema.validate(req.body)
+ 
+      if(error){
+         return res.status(400).json({success:false,message:error.details[0].message})
+      }
+
+        const {username,password,email} = value
 
         const userExist = await UserModel.findOne({email:email})
 
@@ -26,13 +25,14 @@ export const UserRegister = async (req,res) => {
           return  res.status( 400).json({success:false,message:"Email Already Exist"})
         }
 
+        const userNameLower = username.toLowerCase()
         
         const salt = await bcryptjs.genSalt(10);
 
         const hasedPassword = await bcryptjs.hash(password, salt)
       
         const userSave = new UserModel({
-            username,
+            username:userNameLower,
             password:hasedPassword,
             email
         })
@@ -56,10 +56,18 @@ export const UserRegister = async (req,res) => {
     }
 }
 
+// login
 
 export const userLogin = async (req,res) => {
+
+  const {error,value} = userLoginJoiValid.validate(req.body)
+
+  if(error){
+    return res.status(400).json({success:false,message:error.details[0].message})
+ }
+
     try {
-      const {email,password} = req.body;
+      const {email,password} = value;
 
       const accountExist = await UserModel.findOne({email:email}).select(["-password","-email","-_id","-createdAt","-updatedAt","-isAdmin"])
 
@@ -87,7 +95,7 @@ export const userLogin = async (req,res) => {
         }) 
 
 
-      res.status(200).json({success:true,message:"logged",data:accountExist})
+      res.status(200).json({success:true,message:"logged",data:accountExist.username})
       
     } catch (error) {
        return res.status(error.status || 400).json(error.message || "internal server error")
@@ -120,3 +128,19 @@ export const userLogOut = async (req,res) => {
     return res.status(error.status || 400).json(error.message || "internal server error")
   }
 }
+
+
+      export const configTest = async (req,res) => {
+        try {
+          const {email,password} = req.body
+
+          console.log(email)
+
+          res.status(200).json({success:true,message:"data upload successfully",email,password})
+        } catch (error) {
+          return res.status(error.status || 400).json(error.message || "internal server error")
+        }
+      }
+
+
+      

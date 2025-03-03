@@ -1,0 +1,35 @@
+import { axiosInstance } from "./api"
+
+
+
+
+    export const userRegister = async (data) => {
+
+        try {
+            const response = await axiosInstance.post('/user/register',{
+                username:data.username,
+                email:data.email,
+                password:data.password
+            })
+            return response?.data
+        } catch (error) {
+            console.error("Registration error:", error.response?.data || error.message);
+            throw error
+        }
+
+    }
+
+
+    export const  userLogin = async (data) => {
+        try {
+            const response = await axiosInstance.post('/user/login',{
+                email:data.email,
+                password:data.password
+            })
+            return response?.data
+        } catch (error) {
+            console.error("Registration error:", error.response?.data || error.message);
+            throw error
+        }
+
+    }

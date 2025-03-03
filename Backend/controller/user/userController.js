@@ -39,7 +39,7 @@ export const UserRegister = async (req,res) => {
 
         const userData = await userSave.save()
 
-        const token =  jwt.sign({userId:userData._id,userEmail:userExist.email},process.env.JWTSECRECT);
+        const token =  jwt.sign({userId:userData._id,userEmail:userData.email},process.env.JWTSECRECT);
         
  
         res.cookie("token",token,{
@@ -49,7 +49,7 @@ export const UserRegister = async (req,res) => {
             sameSite: 'Strict',
         }) 
 
-      res.status(200).json({success:true, message:"user created successfully",data:userData})
+      res.status(200).json({success:true, message:"user created successfully",data:userData.username})
         
     } catch (error) {
        return res.status(error.status || 400).json(error.message || "internal server error")
@@ -61,7 +61,7 @@ export const userLogin = async (req,res) => {
     try {
       const {email,password} = req.body;
 
-      const accountExist = await UserModel.findOne({email:email}).select("-password")
+      const accountExist = await UserModel.findOne({email:email}).select(["-password","-email","-_id","-createdAt","-updatedAt","-isAdmin"])
 
       if(!accountExist){
         return res.status(400).json({success:false,message:"Account not exist"})

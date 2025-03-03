@@ -40,6 +40,10 @@ import mongoose from 'mongoose'
      imageId:{
       type:String,
       default:""
+     },
+     view:{
+      type:Number,
+      default:0
      }
   })
 

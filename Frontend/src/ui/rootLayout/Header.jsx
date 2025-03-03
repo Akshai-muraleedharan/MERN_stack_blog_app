@@ -10,9 +10,11 @@ const Header = () => {
 
     <div className="flex-none ">
 
+      <Link to={"/login"}>
       <button className="btn  btn-neutral  btn-sm md:btn-md">
        Login
       </button>
+      </Link>
     </div>
 
     

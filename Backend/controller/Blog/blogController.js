@@ -72,3 +72,17 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
         return res.status(error.status || 400).json(error.message || "internal server error")
        }
     }
+
+    export const viewCount = async(req,res) => {
+      try {
+          const {blogId} = req.params
+
+          await blogModel.findByIdAndUpdate(blogId,{
+            $inc:{view : 1}
+          },{new:true})
+
+          res.status(200).json({success:true,message:"view success"})
+      } catch (error) {
+        return res.status(error.status || 400).json(error.message || "internal server error")
+      }
+    }

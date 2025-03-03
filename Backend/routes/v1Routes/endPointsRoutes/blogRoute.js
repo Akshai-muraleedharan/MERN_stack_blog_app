@@ -1,5 +1,5 @@
 import express from "express"
-import { addLike, createBlog, deleteBlog } from "../../../controller/Blog/blogController.js"
+import { addLike, createBlog, deleteBlog, viewCount } from "../../../controller/Blog/blogController.js"
 import { checkUser } from "../../../middleware/userAuth.js"
 import { createComment } from "../../../controller/Blog/commentController.js"
 import { upload } from "../../../middleware/multer.js"
@@ -11,6 +11,7 @@ const blogRoute = express.Router()
   blogRoute.post('/comment/:blogId',checkUser,createComment)
   blogRoute.put('/like/:blogId',checkUser,addLike)
   blogRoute.delete('/delete/:blogId',checkUser,deleteBlog)
+  blogRoute.put('/view/:blogId',viewCount)
 
 
 

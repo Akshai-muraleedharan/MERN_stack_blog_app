@@ -6,7 +6,7 @@ import commentSchemaValid from "../../utils/commentJoiValid.js";
 
  export const createComment = async (req,res) => {
 
-    const {error} = commentSchemaValid.validate(req.body)
+    const {error,value} = commentSchemaValid.validate(req.body)
 
     if(error){
         return res.status(400).json({success:false,message:error.details[0].message})
@@ -15,9 +15,10 @@ import commentSchemaValid from "../../utils/commentJoiValid.js";
 
         const {userId} = req.userId;
         const {blogId} = req.params
-        const {comment} = req.body
+        const {comment} =value
         const userAccount = await UserModel.findById(userId)
 
+       
         if(!blogId){
             return res.status(400).json({success:false,message:"blog id did not get"})
         }

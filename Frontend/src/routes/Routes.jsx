@@ -1,21 +1,28 @@
-import React from 'react'
+import React, {lazy,Suspense} from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-import RooyLayout from '../layout/RootLayout'
-import Home from '../pages/rootpage/Home'
-import LoginPage from '../pages/rootpage/LoginPage'
-import SignupPage from '../pages/rootpage/SignupPage'
-import Test from '../pages/rootpage/Test'
-import AuthLayout from '../layout/AuthLayout'
-import AuthHomePage from '../pages/authpage/AuthHomePage'
 import ProtectedRoute from './ProtectedRoute'
+import Loader from '../components/commonComponents/Loader'
 
 
+
+const RooyLayout = lazy(() => import('../layout/RootLayout')) 
+const Home = lazy(() => import('../pages/rootpage/Home')) 
+const LoginPage = lazy(() => import('../pages/rootpage/LoginPage')) 
+const SignupPage = lazy(() => import('../pages/rootpage/SignupPage')) 
+const SingleListPage = lazy(() => import('../pages/rootpage/SingleListPage')) 
+
+const AuthLayout = lazy(() => import('../layout/AuthLayout'))
+const AuthHomePage = lazy(() => import('../pages/authpage/AuthHomePage')) 
 
 export const router = createBrowserRouter([
   
     {
       path:"/",
-      element:<RooyLayout />,
+      element:(
+        <Suspense fallback={<Loader/>}>
+      <RooyLayout />
+      </Suspense>
+      ),
 
       children:[
         {
@@ -29,20 +36,22 @@ export const router = createBrowserRouter([
         {
           path:"/signup",
           element:<SignupPage />
-        },
-        {
-          path:"/test",
-          element:<Test/>
+        },{
+          path:"/blog/:id",
+          element:<SingleListPage />
         }
+        
       ]
 
   },
   {
     path:"/blog",
     element:( 
+      <Suspense fallback={<Loader/>}>
       <ProtectedRoute>
           <AuthLayout />
-    </ProtectedRoute>
+      </ProtectedRoute>
+      </Suspense>
 
     ),
 

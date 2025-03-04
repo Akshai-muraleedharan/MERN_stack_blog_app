@@ -2,7 +2,7 @@ import React from 'react'
 import SideCard from './SideCard'
 import SingleBlogCard from './SingleBlogCard'
 
-const BlogCard = () => {
+const BlogCard = ({dataFetch,hasMore,fetchData}) => {
 
   
 
@@ -14,9 +14,9 @@ const BlogCard = () => {
 
            <div className='flex flex-col md:flex-row md:justify-between lg:justify-evenly gap-5  mx-auto mt-5'> 
 
-          <div className='w-full md:w-[60%] flex flex-col'>
+          <div className={`w-full md:w-[60%] flex flex-col ${dataFetch.length === 0 ? "justify-center": ""}`}>
 
-           <SingleBlogCard />
+          { dataFetch.length === 0  ? <h2 className='text-center semiBold'>Loading..</h2> : <SingleBlogCard data={dataFetch} hasMore={hasMore} fetchData={fetchData}/>}
           </div>
 
       

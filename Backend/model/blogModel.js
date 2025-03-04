@@ -44,6 +44,10 @@ import mongoose from 'mongoose'
      view:{
       type:Number,
       default:0
+     },
+     category:{
+      type:String,
+      required:true
      }
   })
 

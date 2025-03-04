@@ -39,7 +39,7 @@ export const UserRegister = async (req,res) => {
 
         const userData = await userSave.save()
 
-        const token =  jwt.sign({userId:userData._id,userEmail:userData.email},process.env.JWTSECRECT);
+        const token =  jwt.sign({userId:userData._id,},process.env.JWTSECRECT);
         
  
         res.cookie("token",token,{
@@ -69,7 +69,7 @@ export const userLogin = async (req,res) => {
     try {
       const {email,password} = value;
 
-      const accountExist = await UserModel.findOne({email:email}).select(["-password","-email","-_id","-createdAt","-updatedAt","-isAdmin"])
+      const accountExist = await UserModel.findOne({email:email}).select(["-password","-email","-createdAt","-updatedAt","-isAdmin"])
 
       if(!accountExist){
         return res.status(400).json({success:false,message:"Account not exist"})
@@ -84,7 +84,7 @@ export const userLogin = async (req,res) => {
         return res.status(400).json({success:false,message:"invalid credentials"})
       }
 
-       const token =  jwt.sign({userId:accountExist._id,userEmail:accountExist.email},process.env.JWTSECRECT);
+       const token =  jwt.sign({userId:accountExist._id,},process.env.JWTSECRECT);
         
  
         res.cookie("token",token,{

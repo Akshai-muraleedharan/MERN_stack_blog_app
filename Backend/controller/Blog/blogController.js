@@ -6,16 +6,20 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
 
      export const createBlog = async (req,res) => {
 
-      const {error} = blogSchemaValidation.validate(req.body)
+      const {error,value} = blogSchemaValidation.validate(req.body)
          
       if(error){
         return res.status(400).json({success:false,message:error.details[0].message})
       }
         try {
 
-            const {title,content} = req.body;
+            const {title,content,category} = value;
             const {userId} = req.userId;
             const file = req.file;
+
+            if(!userId){
+              return res.status(400).json({success:false,message:"no user id"})
+            }
 
             if(!file){
               return res.status(400).json({success:false,message:"image file not get"})
@@ -25,14 +29,15 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
             return res.status(400).json({success:false,message:error})
           }) 
 
-          
+          const categToLowerCase = category.toLowerCase();
 
             const blog =  new blogModel({
                 title,
                 content,
                 author:userId,
                 image:uploadResult.secure_url,
-                imageId:uploadResult.public_id
+                imageId:uploadResult.public_id,
+                category:categToLowerCase
             })
 
            const savedBlog =   await blog.save()
@@ -63,7 +68,7 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
 
       const blog = await blogModel.findByIdAndDelete(blogId)
 
-      const uploadResult = await  cloudineryInstance.uploader.destroy(blog.imageId).catch((error) => {
+       await  cloudineryInstance.uploader.destroy(blog.imageId).catch((error) => {
         return res.status(400).json({success:false,message:error})
       })
      
@@ -82,6 +87,45 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
           },{new:true})
 
           res.status(200).json({success:true,message:"view success"})
+      } catch (error) {
+        return res.status(error.status || 400).json(error.message || "internal server error")
+      }
+    }
+
+    export const blogData = async (req,res) => {
+        try {
+          
+      const page = parseInt(req.query.page) || 1
+      const limit = parseInt(req.query.limit) || 6
+
+      const skip = (page - 1) * limit
+
+      const blogs = await blogModel.find({}).skip(skip).limit(limit)
+
+      if(!blogs){
+        return res.status(400).json({success:false,message:"no data found"})
+      }
+
+      res.status(200).json({success:true,message:"data fetched successfully",data:blogs,page,limit,hasMore: blogs.length === limit})
+        } catch (error) {
+          return res.status(error.status || 400).json(error.message || "internal server error")
+        }
+    }
+
+    export const singleBlogData = async (req,res) => {
+
+      try {
+
+        const {blogId} = req.params
+        
+            if(!blogId){
+              return res.status(400).json({success:false,message:"blog Id not get"})
+            }
+
+        const fetchBlog = await blogModel.findById(blogId).populate("author",'-password').populate("comments")
+
+        res.status(200).json({success:true,message:"data fetched",data:fetchBlog})
+
       } catch (error) {
         return res.status(error.status || 400).json(error.message || "internal server error")
       }

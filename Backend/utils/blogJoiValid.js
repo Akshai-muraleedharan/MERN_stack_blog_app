@@ -14,7 +14,11 @@
         author:Joi.string().hex().length(24),
         createdAt:Joi.date(),
         updatedAt:Joi.date(),
-        published:Joi.boolean()
+        published:Joi.boolean(),
+        category:Joi.string().required().messages({
+            'string.base': 'content should be string',
+            'any.required': 'content is required',
+        })
     })
 
     export default blogSchemaValidation

@@ -33,3 +33,19 @@ import { axiosInstance } from "./api"
         }
 
     }
+
+    export const  googleUserAuth = async ({email,username}) => {
+
+        
+        try {
+            const response = await axiosInstance.post('/user/google',{
+                email:email,
+                username:username
+            })
+            return response?.data
+        } catch (error) {
+            console.error("Registration error:", error.response?.data || error.message);
+            throw error
+        }
+
+    }

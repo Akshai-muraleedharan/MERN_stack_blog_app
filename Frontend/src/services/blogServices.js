@@ -25,4 +25,15 @@ import { axiosInstance } from "./api"
     } 
   }
 
+
+  export const pageView = async (blogId) => {
+    try {
+      const response = await axiosInstance.put(`/blog/view/${blogId}`)
+      return response?.data
+    } catch (error) {
+        console.error("blog error:", error.response?.data || error.message);
+        throw error
+    } 
+  }
+
   

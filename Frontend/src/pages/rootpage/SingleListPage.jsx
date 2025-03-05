@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { singleBlogPage } from '../../services/blogServices'
+import { pageView, singleBlogPage } from '../../services/blogServices'
 import { useParams } from 'react-router-dom'
 import SingleListCard from '../../components/rootComponents/SingleListCard';
 const SingleListPage = () => {
@@ -33,11 +33,20 @@ const SingleListPage = () => {
     }
   }
 
+   const pageViewCount = async () => {
+      try {
+         await pageView(blogId.id)
+      } catch (error) {
+        console.log(error)
+      }
+   }
+
   useEffect(() => {
     fetchSingleBlog()
+    pageViewCount()
   },[])
 
-     setTimeout(()=>{ setLoadMore(false)},2000)
+     setTimeout(()=>{ setLoadMore(false)},3000)
 
   return (
     <div className="px-5 md:px-10 lg:px-32 ">

@@ -12,12 +12,12 @@ const AuthHeader = () => {
     <div className="navbar  bg-base-100 shadow-sm px-5">
     
          <div className="flex-1">
-                <Link to={"/"} className="btn btn-ghost pl-0 text-xl">Dev_Blogs</Link>
+                <Link to={"/blog"} className="btn btn-ghost pl-0 text-xl">Dev_Blogs</Link>
          </div>
 
             <div className="flex gap-4 items-center">
 
-                <p className='text-[14px] font-semibold md:text-md'>{`Welcome, ${user}`}</p>
+                <p className='text-[14px] font-semibold md:text-md'>{`Welcome, ${user.username}`}</p>
 
 
                                   <div className="dropdown dropdown-end">

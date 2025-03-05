@@ -1,13 +1,16 @@
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {Link} from "react-router-dom"
+import useAuthStore from '../../store/authStore'
+
 const SingleBlogCard = ({data,hasMore,fetchData}) => {
 
+  const {user} = useAuthStore()
+
+ 
       const dateConvert = (datestr) => {
-
-        const date = new Date(datestr)
-
-        const formattedDate = date.toLocaleString('en-US', {
+       const date = new Date(datestr)
+      const formattedDate = date.toLocaleString('en-US', {
           month: 'long',
           day: 'numeric',
         });
@@ -23,7 +26,7 @@ const SingleBlogCard = ({data,hasMore,fetchData}) => {
      loader={<p className='flex justify-center'> <span className="loading loading-spinner loading-md mx-auto"></span></p>}
       endMessage={<p className='text-xs text-center'>No more Data Found</p>} >
         {data.map((item) => (
-          <Link to={`/blog/${item._id}`} key={item._id}>
+          <Link to={user ?`auth/${item._id}` :  `/blog/${item._id}`} key={item._id}>
            <div  className="card  bg-base-200 w-[100%] card-sm shadow-md mb-5 cursor-pointer">
            <div className="card-body">
              <h2 className="card-title">{item.title}</h2>

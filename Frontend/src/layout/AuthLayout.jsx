@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom'
 
 const AuthLayout = () => {
   return (
-    <div>
+    <div className='flex flex-col min-h-[100vh]'>
         <AuthHeader />
         <Outlet />
     {/* footer taken from rootlayout ui */}

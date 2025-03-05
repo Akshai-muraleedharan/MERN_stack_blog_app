@@ -37,6 +37,8 @@ import mongoose from 'mongoose'
       type:Number,
       default:0
      },
+
+    
      imageId:{
       type:String,
       default:""

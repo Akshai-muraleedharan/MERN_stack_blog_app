@@ -9,7 +9,7 @@ import {devtools,persist} from "zustand/middleware"
 
         setUser : (user) => set({user,isAuthenticated:true,isLoading:false}),
         setLoading : (loading) => set({isLoading:loading}),
-        setUserAuth :(user) => set({user,isAuthenticated:false,isLoading:false})
+        SetUserNoToken :(user) => set({user,isAuthenticated:false,isLoading:false})
     }),
     {
         name:"user-data",

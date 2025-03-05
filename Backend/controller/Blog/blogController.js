@@ -100,7 +100,7 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
 
       const skip = (page - 1) * limit
 
-      const blogs = await blogModel.find({}).skip(skip).limit(limit)
+      const blogs = await blogModel.find({}).sort({createdAt:-1}).skip(skip).limit(limit)
 
       if(!blogs){
         return res.status(400).json({success:false,message:"no data found"})

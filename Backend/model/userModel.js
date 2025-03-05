@@ -20,6 +20,7 @@ import mongoose from "mongoose"
         type:Boolean,
         default:false
     },
+    
      
   }, { timestamps: true })
 

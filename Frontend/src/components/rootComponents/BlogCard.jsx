@@ -2,7 +2,7 @@ import React from 'react'
 import SideCard from './SideCard'
 import SingleBlogCard from './SingleBlogCard'
 
-const BlogCard = ({dataFetch,hasMore,fetchData}) => {
+const BlogCard = ({dataFetch,hasMore,fetchData,mostView}) => {
 
   
 
@@ -21,7 +21,7 @@ const BlogCard = ({dataFetch,hasMore,fetchData}) => {
 
       
 
-        <SideCard />
+        <SideCard mostView={mostView}/>
            </div>
     </>
   )

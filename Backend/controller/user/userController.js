@@ -49,7 +49,12 @@ import UserModel from "../../model/userModel.js";
               sameSite: 'Strict',
           }) 
 
-        res.status(201).json({success:true, message:"user created successfully",data:userData.username})
+          const userlist = {
+             username:userData.username,
+             userId:userData._id
+          }
+
+        res.status(201).json({success:true, message:"user created successfully",data:userlist})
           
       } catch (error) {
         return res.status(error.status || 400).json(error.message || "internal server error")
@@ -95,7 +100,7 @@ import UserModel from "../../model/userModel.js";
           }) 
 
 
-        res.status(200).json({success:true,message:"logged",data:accountExist.username})
+        res.status(200).json({success:true,message:"logged",data:accountExist})
         
       } catch (error) {
         return res.status(error.status || 400).json(error.message || "internal server error")
@@ -147,7 +152,7 @@ import UserModel from "../../model/userModel.js";
          try{
           const { email , username } = req.body
 
-          const user = await UserModel.findOne({email:email})
+          const user = await UserModel.findOne({email:email}).select("-password")
 
           if(user){
 
@@ -160,8 +165,12 @@ import UserModel from "../../model/userModel.js";
               maxAge: 60 * 60 * 1000, 
               sameSite: 'Strict',
           }) 
+          const userlist = {
+            username:user.username,
+            userId:user._id
+         }
 
-          res.status(200).json({success:true,message:"logged",data:user.username})
+          res.status(200).json({success:true,message:"logged",data:userlist})
 
           }else{
             const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8) 
@@ -179,13 +188,18 @@ import UserModel from "../../model/userModel.js";
 
               await newUser.save()
 
-              res.status(201).json({success:true, message:"user created successfully",data:newUser.username})
+              const userlist = {
+                username:newUser.username,
+                userId:newUser._id
+             }
+
+              res.status(201).json({success:true, message:"user created successfully",data:userlist})
           }
 
           
           
          }catch(error){
-            console.log(error);
+          return res.status(error.status || 400).json(error.message || "internal server error")
             
          }
       }

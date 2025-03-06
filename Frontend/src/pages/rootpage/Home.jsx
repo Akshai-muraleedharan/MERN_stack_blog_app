@@ -2,18 +2,20 @@ import React, { useEffect, useState } from 'react'
 import Hero from '../../components/rootComponents/Hero'
 import BlogCard from '../../components/rootComponents/BlogCard'
 import { fetchBlogData, mostViewBlog } from '../../services/blogServices'
+import useAuthStore from '../../store/authStore'
 
 
 
 const Home = () => {
 
   const [dataFetch,setFetchData] = useState([])
+  
   const [hasMore,setHasMore] = useState(true)
   const [page,setPage] = useState(1)
   const [mostView,setMostView] = useState([])
-
-
   
+
+  const SetUserNoToken = useAuthStore((state) => state.SetUserNoToken)
   
   const limit = 2
 
@@ -48,6 +50,9 @@ const Home = () => {
       fetchMostViewBlog()
     },[])
 
+    setTimeout(() => {
+      SetUserNoToken(null)
+    },60 * 60 * 1000)
  
   return (
     <div>

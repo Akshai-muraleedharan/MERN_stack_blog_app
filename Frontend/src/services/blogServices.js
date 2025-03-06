@@ -124,6 +124,44 @@ import { axiosInstance } from "./api"
   }
 
 
+  export const authCommentBlog = async (blogId,data) => {
+    try {
+      const response = await axiosInstance.post(`/blog/comment/${blogId}`,{
+        comment:data.comment
+      })
+      return response?.data
+    } catch (error) {
+        console.error("blog error:", error.response?.data || error.message);
+        throw error
+    } 
+  }
+
+
+  export const authCommentUpdate = async (commentId,data) => {
+    try {
+      const response = await axiosInstance.put(`/blog/auth/update/${commentId}`,{
+        comment:data.comment
+      })
+      return response?.data
+    } catch (error) {
+        console.error("blog error:", error.response?.data || error.message);
+        throw error
+    } 
+  }
+
+
+  
+  export const authCommentDelete = async (commentId) => {
+    try {
+      const response = await axiosInstance.delete(`/blog/auth/delete/${commentId}`)
+      return response?.data
+    } catch (error) {
+        console.error("blog error:", error.response?.data || error.message);
+        throw error
+    } 
+  }
+
+
 
 
 

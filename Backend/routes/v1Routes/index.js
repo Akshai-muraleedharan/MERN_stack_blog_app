@@ -7,4 +7,4 @@ const routers = express.Router()
 routers.use('/user',userRoute)
 routers.use('/blog',blogRoute)
 
-export default routers
+export default routers 

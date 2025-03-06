@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import useAuthStore from '../../store/authStore'
 import { FaBars } from "react-icons/fa6";
 
@@ -20,13 +20,18 @@ const AuthHeader = () => {
                 <p className='text-[14px] font-semibold md:text-md'>{`Welcome, ${user.username}`}</p>
 
 
-                                  <div className="dropdown dropdown-end">
+                                  <div className=" md:hidden dropdown dropdown-end">
                                     <div tabIndex={0} role="button" > <FaBars className='text-[23px]'/> </div>
                                     <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box mt-1 z-1 w-52 p-2 shadow-sm">
                                       <li><a>Item 1</a></li>
                                       <li><a>Item 2</a></li>
                                     </ul>
                                   </div>
+
+                                  <ul className='hidden md:flex gap-5'>
+                                   <NavLink to={"create-blog"}><li className='text-[14px] font-semibold hover:text-gray-500 md:text-md cursor-pointer'>Create Blog</li></NavLink> 
+                                    <li className='text-[14px] font-semibold hover:text-gray-500 md:text-md cursor-pointer'>Profile</li>
+                                  </ul>
             </div>
 
   </div>

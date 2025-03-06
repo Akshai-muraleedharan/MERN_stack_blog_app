@@ -29,8 +29,7 @@ const SingleBlogCard = ({data,hasMore,fetchData}) => {
           <Link to={user ?`auth/${item._id}` :  `/blog/${item._id}`} key={item._id}>
            <div  className="card  bg-base-200 w-[100%] card-sm shadow-md mb-5 cursor-pointer">
            <div className="card-body">
-             <h2 className="card-title">{item.title}</h2>
-             <p className='max-w-2xl text-[14px] text-gray-600 leading-6'>{item.content.slice(0,90) + "..."}</p>
+             <h2 className="card-title  text-xl md:text-2xl hover:text-gray-500">{item.title}</h2>
              <div className="flex justify-between items-center">
             
             <div className='flex gap-4'>

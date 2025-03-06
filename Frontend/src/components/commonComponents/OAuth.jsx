@@ -18,7 +18,7 @@ export const OAuth = () => {
 
             const result = await signInWithPopup(auth,provider)
 
-            console.log(result)
+            
             const data = {
               email:result.user.email,
               username:result.user.displayName

@@ -14,6 +14,13 @@
             type:mongoose.Schema.Types.ObjectId,
             ref:"Blog"
         },
+        commented:{
+            type:Boolean,
+            default:false
+        },
+        userId:{
+            type:String
+        },
 
         createdAt:{
             type:Date,

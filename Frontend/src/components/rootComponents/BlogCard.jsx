@@ -4,11 +4,9 @@ import SingleBlogCard from './SingleBlogCard'
 
 const BlogCard = ({dataFetch,hasMore,fetchData,mostView}) => {
 
-  
 
   return (
     <>
-
 
     <h1 className='text-md md:text-2xl'>Latest Post</h1>
 
@@ -16,7 +14,7 @@ const BlogCard = ({dataFetch,hasMore,fetchData,mostView}) => {
 
           <div className={`w-full md:w-[60%] flex flex-col ${dataFetch.length === 0 ? "justify-center": ""}`}>
 
-          { dataFetch.length === 0  ? <h2 className='text-center semiBold'>Loading..</h2> : <SingleBlogCard data={dataFetch} hasMore={hasMore} fetchData={fetchData}/>}
+          { dataFetch.length === 0  ? <p className='flex justify-center'><span className="loading loading-spinner loading-sm"></span></p> : <SingleBlogCard data={dataFetch} hasMore={hasMore} fetchData={fetchData}/>}
           </div>
 
       

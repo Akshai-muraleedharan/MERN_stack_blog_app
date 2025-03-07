@@ -4,7 +4,7 @@
     import dbConnect from "./config/db.js"
     import cookieParser from "cookie-parser"
     import cors from "cors"
-
+    import helmet from "helmet"
 
     const app = express()
 
@@ -14,6 +14,7 @@
         credentials:true
     }
 
+    app.use(helmet())
     app.use(express.json())
     app.use(cookieParser())
     app.use(cors(corsOption))

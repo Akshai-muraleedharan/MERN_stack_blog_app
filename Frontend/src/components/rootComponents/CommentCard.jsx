@@ -1,17 +1,19 @@
 import React from 'react'
 import { FaCircleDot } from "react-icons/fa6";
 import useAuthStore from '../../store/authStore';
-const CommentCard = ({checkComment,dateConvert,setCommentBox,updateComment,userDeleteComment}) => {
+const CommentCard = ({checkComment,dateConvert,setCommentBox,updateComment,userDeleteComment,setCommentForUpdate}) => {
 
 
   const {user} = useAuthStore()
 
   const editComment = (id) => {   
-     updateComment(id)  
+     updateComment(id) 
+     setCommentBox(true)
   }
 
   const deleteComment = (id) => {
     userDeleteComment(id)
+    setCommentForUpdate(null)
   }
   return (
     <div  className=' w-full md:w-[80%]  flex flex-col  p-4 shadow-sm my-2  rounded-xl'> 

@@ -1,4 +1,5 @@
 import { cloudineryInstance } from "../../config/cloudinaryConfig.js";
+import sanitizeContet from "../../middleware/domSanitize.js";
 import LikeModel from "../../model/blogLikeModel.js";
 import blogModel from "../../model/blogModel.js";
 import UserModel from "../../model/userModel.js";
@@ -19,6 +20,8 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
             const {userId} = req.userId;
             const file = req.file;
 
+            const sanitizeHtml =  sanitizeContet(content)
+
             if(!userId){
               return res.status(400).json({success:false,message:"no user id"})
             }
@@ -35,7 +38,7 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
 
             const blog =  new blogModel({
                 title,
-                content,
+                content:sanitizeHtml,
                 author:userId,
                 image:uploadResult.secure_url,
                 imageId:uploadResult.public_id,

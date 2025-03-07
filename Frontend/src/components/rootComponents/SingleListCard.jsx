@@ -37,7 +37,7 @@ const SingleListCard = ({userUpdateComment,sanitizedContent,fetchData,dateConver
             <h3 className='font-semibold'>Comments</h3>
                 
              <div className='flex flex-col items-center'>
-             { user && commentBox  ? <CommentTextArea userUpdateComment={userUpdateComment} setCommentForUpdate={setCommentForUpdate} commentForUpdate={commentForUpdate} setCommentBox={setCommentBox} postComment={postComment}/>  : checkComment.length === 0 ? <p>No Comment</p>  :  <CommentCard updateComment={updateComment} setCommentBox={setCommentBox} checkComment={checkComment} userDeleteComment={userDeleteComment} dateConvert={dateConvert} />   }
+             { user && commentBox  ? <CommentTextArea userUpdateComment={userUpdateComment} setCommentForUpdate={setCommentForUpdate} commentForUpdate={commentForUpdate} setCommentBox={setCommentBox} postComment={postComment}/>  : checkComment.length === 0 ? <p>No Comment</p>  :  <CommentCard setCommentForUpdate={setCommentForUpdate} updateComment={updateComment} setCommentBox={setCommentBox} checkComment={checkComment} userDeleteComment={userDeleteComment} dateConvert={dateConvert} />   }
             </div>  
             </div>
     </div>

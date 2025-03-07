@@ -3,6 +3,7 @@ import { authCommentBlog, authCommentDelete, authCommentUpdate, authLike, authPa
 import { useParams } from 'react-router-dom'
 import SingleListCard from '../../components/rootComponents/SingleListCard'
 import useAuthStore from '../../store/authStore'
+import DOMpurify from'dompurify'
 
 const AuthSingleListPage = () => {
   
@@ -14,11 +15,11 @@ const AuthSingleListPage = () => {
   const [userClick,setUserClick] = useState(false)
   const [commentBox,setCommentBox] = useState(false)
   const [commentForUpdate,setCommentForUpdate] = useState(null)
-  
+   const [sanitizedContent,setSanitizedContent] = useState("")
 
   let blogId = useParams()
   const {user} = useAuthStore()
-  console.log(user)
+  console.log(sanitizedContent)
   const SetUserNoToken = useAuthStore((state) => state.SetUserNoToken)
   const dateConvert = (item) => {
     const date = new Date(item)
@@ -40,6 +41,8 @@ const AuthSingleListPage = () => {
       const res = await authSingleBlogPage(blogId.id)
       setLikedBlog(res.getLike)
       setFetchData(res?.data)
+      const sanitized = DOMpurify.sanitize(res?.data?.content)
+      setSanitizedContent(sanitized)
 
       const sortData = res?.data?.comments?.sort((a,b) => (a.userId === user._id ? -1 : 1))
 
@@ -168,7 +171,7 @@ const AuthSingleListPage = () => {
     <div className="px-5 md:px-10 lg:px-32 ">
 
   
-   { loading === true ? <p className='flex justify-center mt-4'><span className="loading loading-spinner loading-md"></span></p>  : <SingleListCard loading={loading} userDeleteComment={userDeleteComment} userUpdateComment={userUpdateComment} postComment={postComment} commentForUpdate={commentForUpdate} setCommentBox={setCommentBox} commentBox={commentBox} checkComment={checkComment} userClick={userClick} likedBlog={likedBlog} unLike={unLike} addLike={addLike} addComment={addComment}   fetchData={fetchData} fetchSingleBlog={fetchSingleBlog}  loadMore={loadMore} dateConvert={dateConvert} blogId={blogId} updateComment={updateComment} setCommentForUpdate={setCommentForUpdate} />}
+   { loading === true ? <p className='flex justify-center mt-4'><span className="loading loading-spinner loading-md"></span></p>  : <SingleListCard sanitizedContent={sanitizedContent} loading={loading} userDeleteComment={userDeleteComment} userUpdateComment={userUpdateComment} postComment={postComment} commentForUpdate={commentForUpdate} setCommentBox={setCommentBox} commentBox={commentBox} checkComment={checkComment} userClick={userClick} likedBlog={likedBlog} unLike={unLike} addLike={addLike} addComment={addComment}   fetchData={fetchData} fetchSingleBlog={fetchSingleBlog}  loadMore={loadMore} dateConvert={dateConvert} blogId={blogId} updateComment={updateComment} setCommentForUpdate={setCommentForUpdate} />}
    </div>
   )
 }

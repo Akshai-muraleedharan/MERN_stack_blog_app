@@ -23,6 +23,10 @@
     
     //  connect db
     dbConnect()
+
+    app.get('/', (req,res) => {
+        res.send("Success")
+    })
     
     app.use('/api',v1Router)
     

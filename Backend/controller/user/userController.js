@@ -46,7 +46,7 @@ import UserModel from "../../model/userModel.js";
               httpOnly: true, 
               secure: process.env.NODE_ENV === 'production', 
               maxAge: 60 * 60 * 1000, 
-              sameSite: 'Strict',
+              sameSite: 'none',
           }) 
 
           const userlist = {
@@ -96,7 +96,7 @@ import UserModel from "../../model/userModel.js";
               httpOnly: true, 
               secure: process.env.NODE_ENV === 'production', 
               maxAge: 60 * 60 * 1000, 
-              sameSite: 'Strict',
+              sameSite: 'none',
           }) 
 
 
@@ -163,7 +163,7 @@ import UserModel from "../../model/userModel.js";
               httpOnly: true, 
               secure: process.env.NODE_ENV === 'production', 
               maxAge: 60 * 60 * 1000, 
-              sameSite: 'Strict',
+              sameSite: 'none',
           }) 
           const userlist = {
             username:user.username,

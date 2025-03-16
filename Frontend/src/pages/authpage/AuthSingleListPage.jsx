@@ -19,7 +19,7 @@ const AuthSingleListPage = () => {
 
   let blogId = useParams()
   const {user} = useAuthStore()
-  console.log(sanitizedContent)
+  
   const SetUserNoToken = useAuthStore((state) => state.SetUserNoToken)
   const dateConvert = (item) => {
     const date = new Date(item)

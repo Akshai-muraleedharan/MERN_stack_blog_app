@@ -1,5 +1,5 @@
 import express from "express"
-import { addLike, authBlogData, authMostViewBlog, authSingleBlogData, authViewCount, blogData, createBlog, deleteBlog, mostViewBlog, singleBlogData, unLike, viewCount } from "../../../controller/Blog/blogController.js"
+import { addLike, authBlogData, authMostViewBlog, authSingleBlogData, authViewCount, blogData, createBlog, deleteBlog, mostViewBlog, singleBlogData, unLike, updateBlog, viewCount } from "../../../controller/Blog/blogController.js"
 import { checkUser } from "../../../middleware/userAuth.js"
 import { createComment, deleteComment, updateComment } from "../../../controller/Blog/commentController.js"
 import { upload } from "../../../middleware/multer.js"
@@ -8,6 +8,7 @@ import { upload } from "../../../middleware/multer.js"
 const blogRoute = express.Router()
   // protected route
   blogRoute.post('/create',upload.single("image"),checkUser,createBlog)
+  blogRoute.put('/update/:blogId',upload.single("image"),checkUser,updateBlog)
   blogRoute.post('/comment/:blogId',checkUser,createComment)
   blogRoute.put('/like/:blogId',checkUser,addLike)
   blogRoute.put('/unlike/:blogId',checkUser,unLike)

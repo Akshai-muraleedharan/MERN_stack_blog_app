@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken"
 
         
         if(!token){
-            return res.status(400).json({success:false,message:"no token"})
+            return res.status(401).json({success:false,message:"no token"})
         }
 
         jwt.verify(token,process.env.JWTSECRECT,(err,decoded) => {     

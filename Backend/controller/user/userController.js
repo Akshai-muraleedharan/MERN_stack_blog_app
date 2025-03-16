@@ -117,7 +117,7 @@ import UserModel from "../../model/userModel.js";
           return res.status(400).json({success:false,message:"userid is not get"})
         }
 
-        const user = await UserModel.findById(userId).select("-password")
+        const user = await UserModel.findById(userId).select("-password").populate("postedBlogs")
 
         res.status(200).json({success:true,message:"fetched",userData:user})
       } catch (error) {
@@ -167,7 +167,8 @@ import UserModel from "../../model/userModel.js";
           }) 
           const userlist = {
             username:user.username,
-            userId:user._id
+            userId:user._id,
+            
          }
 
           res.status(200).json({success:true,message:"logged",data:userlist})
@@ -183,10 +184,21 @@ import UserModel from "../../model/userModel.js";
            const newUser = new UserModel({
                  username:getFirstName[0].toLowerCase(),
                  password:hashedPassword,
-                 email
+                 email,
+                 isOAuth:true
            })
 
               await newUser.save()
+
+              const token =  jwt.sign({userId:newUser._id,},process.env.JWTSECRECT);
+          
+  
+              res.cookie("token",token,{
+                  httpOnly: true, 
+                  secure: process.env.NODE_ENV === 'production', 
+                  maxAge: 60 * 60 * 1000, 
+                  sameSite: 'none',
+              }) 
 
               const userlist = {
                 username:newUser.username,

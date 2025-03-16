@@ -18,7 +18,7 @@ const SingleListCard = ({userUpdateComment,sanitizedContent,fetchData,dateConver
                  {loadMore ? <p className='flex justify-center mt-4'> <span className="loading loading-spinner loading-sm"></span> </p> : <img className='h-60 md:h-96 w-full object-cover' src={fetchData.image} alt={fetchData.title} loading="lazy" />}
             </div>
 
-            <div className='mt-10' dangerouslySetInnerHTML={{__html:sanitizedContent}} ></div>
+            <div className='mt-10 min-w-[330px]' dangerouslySetInnerHTML={{__html:sanitizedContent}} ></div>
 
             <div className='my-10 flex justify-between items-center'>
 

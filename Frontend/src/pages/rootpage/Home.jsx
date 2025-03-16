@@ -3,7 +3,7 @@ import Hero from '../../components/rootComponents/Hero'
 import BlogCard from '../../components/rootComponents/BlogCard'
 import { fetchBlogData, mostViewBlog } from '../../services/blogServices'
 import useAuthStore from '../../store/authStore'
-
+import Cookies from 'js-cookie';
 
 
 const Home = () => {
@@ -16,6 +16,10 @@ const Home = () => {
   
 
   const SetUserNoToken = useAuthStore((state) => state.SetUserNoToken)
+
+ 
+  
+
   
   const limit = 2
 
@@ -48,11 +52,19 @@ const Home = () => {
     useEffect(() => {
       fetchData()
       fetchMostViewBlog()
+
+
+      const getCookie = Cookies.get("token") 
+   
+      if(getCookie === undefined){
+        SetUserNoToken(null)
+      }
     },[])
 
-    setTimeout(() => {
-      SetUserNoToken(null)
-    },60 * 60 * 1000)
+
+    
+
+    
  
   return (
     <div>

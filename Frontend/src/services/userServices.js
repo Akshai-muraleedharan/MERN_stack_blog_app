@@ -49,3 +49,20 @@ import { axiosInstance } from "./api"
         }
 
     }
+
+
+
+    //  auth route function are below
+
+
+    
+    export const  authUserProfile = async (data) => {
+        try {
+            const response = await axiosInstance.get('/user/profile')
+            return response?.data
+        } catch (error) {
+            console.error("Registration error:", error.response?.data || error.message);
+            throw error
+        }
+
+    }

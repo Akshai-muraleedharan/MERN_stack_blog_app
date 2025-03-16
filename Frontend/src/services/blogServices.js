@@ -161,6 +161,53 @@ import { axiosInstance } from "./api"
     } 
   }
 
+  export const authCreateBlog = async (formData) => {
+    try {
+
+      const response = await axiosInstance.post(`/blog/create`,formData,{
+
+        Headers:{
+          "Content-Type": "multipart/form-data",
+        }
+      },)
+      return response?.data
+    } catch (error) {
+        console.error("blog error:", error.response?.data || error.message);
+        throw error
+        
+    } 
+  }
+
+
+  export const authUpdateBlog = async (formData,id) => {
+    try {
+
+      const response = await axiosInstance.put(`/blog/update/${id}`,formData,{
+
+        Headers:{
+          "Content-Type": "multipart/form-data",
+        }
+      },)
+      return response?.data
+    } catch (error) {
+        console.error("blog error:", error.response?.data || error.message);
+        throw error
+        
+    } 
+  }
+
+  export const authDeleteBlog = async (id) => {
+    try {
+
+      const response = await axiosInstance.delete(`/blog/delete/${id}`)
+      return response?.data
+    } catch (error) {
+        console.error("blog error:", error.response?.data || error.message);
+        throw error
+        
+    } 
+  }
+
 
 
 

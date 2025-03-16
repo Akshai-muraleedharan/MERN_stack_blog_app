@@ -20,6 +20,12 @@ import mongoose from "mongoose"
         type:Boolean,
         default:false
     },
+    postedBlogs:[{type:mongoose.Schema.Types.ObjectId, ref:"Blog"}],
+    
+    isOAuth:{
+        type:Boolean,
+        default:false
+    }
     
      
   }, { timestamps: true })

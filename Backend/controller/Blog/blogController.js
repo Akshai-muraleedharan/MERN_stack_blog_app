@@ -30,9 +30,14 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
               return res.status(400).json({success:false,message:"image file not get"})
             }
 
+            
+
+              
           const uploadResult = await  cloudineryInstance.uploader.upload(file.path,{ folder: "Mern Blog/Blog Images" }).catch((error)=>{
             return res.status(400).json({success:false,message:error})
-          }) 
+          })
+
+          
 
           const categToLowerCase = category.toLowerCase();
 
@@ -47,7 +52,72 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
 
            const savedBlog =   await blog.save()
 
+           const user = await UserModel.findById(userId)
+
+            user.postedBlogs.push(savedBlog._id)
+
+           await user.save()
+
             res.status(200).json({success:true,message:"blog create successfully",data:savedBlog})
+            
+        } catch (error) {
+             return res.status(error.status || 400).json(error.message || "internal server error")
+        }
+    }
+
+
+    // update Blog
+
+    export const updateBlog = async (req,res) => {
+
+      const {error,value} = blogSchemaValidation.validate(req.body)
+         
+      if(error){
+        return res.status(400).json({success:false,message:error.details[0].message})
+      }
+        try {
+
+            const {title,content,category} = value;
+            const {userId} = req.userId;
+            const {blogId} = req.params
+            const file = req.file;
+
+            const sanitizeHtml =  sanitizeContet(content)
+
+            if(!userId){
+              return res.status(400).json({success:false,message:"no user id"})
+            }
+
+           
+              
+          const uploadResult = await  cloudineryInstance.uploader.upload(file.path,{ folder: "Mern Blog/Blog Images" }).catch((error)=>{
+            return res.status(400).json({success:false,message:error})
+          })
+
+          
+
+          const categToLowerCase = category.toLowerCase();
+
+             await blogModel.findByIdAndUpdate(blogId,{
+              title,
+                content:sanitizeHtml,
+                author:userId,
+                image:uploadResult.secure_url,
+                imageId:uploadResult.public_id,
+                category:categToLowerCase
+             },{new:true})
+
+            
+
+          //  const savedBlog =   await blog.save()
+
+          //  const user = await UserModel.findById(userId)
+
+          //   user.postedBlogs.push(savedBlog._id)
+
+          //  await user.save()
+
+            res.status(200).json({success:true,message:"blog create successfully",})
             
         } catch (error) {
              return res.status(error.status || 400).json(error.message || "internal server error")

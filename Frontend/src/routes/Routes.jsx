@@ -2,6 +2,8 @@ import React, {lazy,Suspense} from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
 import Loader from '../components/commonComponents/Loader'
+import AuthProfilePage from '../pages/authpage/AuthProfilePage'
+
 
 
 
@@ -17,6 +19,7 @@ const AuthLayout = lazy(() => import('../layout/AuthLayout'))
 const AuthHomePage = lazy(() => import('../pages/authpage/AuthHomePage')) 
 const AuthSingleListPage = lazy(() => import('../pages/authpage/AuthSingleListPage')) 
 const AuthCreateBlogPage = lazy(() => import('../pages/authpage/AuthCreateBlogPage')) 
+const AuthListPageContent = lazy(() => import('../pages/authpage/AuthListPageContent')) 
 
 export const router = createBrowserRouter([
   
@@ -71,6 +74,14 @@ export const router = createBrowserRouter([
       {
         path:"create-blog",
         element:<AuthCreateBlogPage />
+      },
+      {
+        path:"user-profile",
+        element:<AuthProfilePage />
+      },
+      {
+        path:"/blog/user-profile/blog-data/:id",
+        element:<AuthListPageContent />
       }
     ]
 

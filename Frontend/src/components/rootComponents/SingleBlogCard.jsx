@@ -25,7 +25,7 @@ const SingleBlogCard = ({data,hasMore,fetchData}) => {
      hasMore={hasMore} 
      loader={<p className='flex justify-center'> <span className="loading loading-spinner loading-md mx-auto"></span></p>}
       endMessage={<p className='text-xs text-center'>No more Data Found</p>} >
-        {data.map((item) => (
+        {data.filter(item => item.published === true).map((item) => (
           <Link to={user ?`auth/${item._id}` :  `/blog/${item._id}`} key={item._id}>
            <div  className="card  bg-base-200 w-[100%] card-sm shadow-md mb-5 cursor-pointer">
            <div className="card-body">

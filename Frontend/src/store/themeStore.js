@@ -10,6 +10,10 @@ const useThemeStore = create(
         theme:THEME_LIGHT,
         toggleTheme: () => set((state) => ({theme : state.theme === THEME_LIGHT ? THEME_DARK : THEME_LIGHT}))
     }),
+    {
+        name:"theme-data",
+        getStorage: () => localStorage,
+    }
     
 
  ), {name : "theme"}))

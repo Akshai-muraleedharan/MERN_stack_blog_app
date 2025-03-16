@@ -66,3 +66,14 @@ import { axiosInstance } from "./api"
         }
 
     }
+
+    export const  authUserLogOut = async (data) => {
+        try {
+            const response = await axiosInstance.post('/user/logout')
+            return response?.data
+        } catch (error) {
+            console.error("Registration error:", error.response?.data || error.message);
+            throw error
+        }
+
+    }

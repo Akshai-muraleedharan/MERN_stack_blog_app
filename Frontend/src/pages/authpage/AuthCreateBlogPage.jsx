@@ -59,7 +59,7 @@ const AuthCreateBlogPage = () => {
   
   return (
 
-	<div className='px-5 md:px-10 lg:px-32  w-full mb-5 bg-[#f9f9f9]'>
+	<div className='px-5 md:px-10 lg:px-32 dark:bg-black w-full mb-5 bg-[#f9f9f9]'>
 	
 	{ loading && <progress className="progress progress-primary sticky top-0 w-full" value={upload} max={100} ></progress>}
 

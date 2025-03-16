@@ -40,19 +40,19 @@ const AuthProfilePage = () => {
      },[])
 
   return (
-    <div className='px-5 md:px-10 lg:px-32  w-full mb-5 bg-[#f9f9f9]' >
+    <div className='px-5 md:px-10 lg:px-32  w-full mb-5 dark:bg-black bg-[#f9f9f9]' >
        
-            <h1 className='text-center mt-10 font-semibold text-2xl'>Profile</h1>
+            <h1 className='text-center mt-10 font-semibold text-2xl dark:text-white'>Profile</h1>
   
-               {loading ? <p className='flex justify-center mt-4'><span className="loading loading-spinner loading-md"></span></p> : <AuthUserProfileComponent fetchProfile={fetchProfile} ClickedInput={ClickedInput} ButtonOpen={ButtonOpen} userDetails={userDetails}/> }
+               {loading ? <p className='flex justify-center mt-4'><span className="loading dark:bg-white loading-spinner loading-md"></span></p> : <AuthUserProfileComponent fetchProfile={fetchProfile} ClickedInput={ClickedInput} ButtonOpen={ButtonOpen} userDetails={userDetails}/> }
   
                <div className="mt-20 ">
   
               
                
-                <h1 className='text-center mt-10 mb-5 font-semibold text-2xl'>Posted Blogs</h1>
+                <h1 className='text-center mt-10 mb-5 font-semibold text-2xl dark:text-white'>Posted Blogs</h1>
   
-                {loading ? <p className='flex justify-center mt-4'><span className="loading loading-spinner loading-md"></span></p> : <AuthUserBlogsList  postedBlog={postedBlog}  /> }
+                {loading ? <p className='flex justify-center mt-4'><span className="loading dark:bg-white loading-spinner loading-md"></span></p> : <AuthUserBlogsList  postedBlog={postedBlog}  /> }
                
                </div>
        </div>

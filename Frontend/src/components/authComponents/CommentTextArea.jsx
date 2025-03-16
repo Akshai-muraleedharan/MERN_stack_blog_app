@@ -28,7 +28,7 @@ const CommentTextArea = ({setCommentBox,postComment,commentForUpdate,setCommentF
    
           <form className="fieldset mt-10" onSubmit={commentForUpdate ? handleSubmit(onCommentUpdate) : handleSubmit(onCommentadd)}>
               <textarea {...register("comment")} className="textarea w-3xs sm:w-xl xl:w-3xl" defaultValue={commentForUpdate ? commentForUpdate.comment : ""} name={"comment"} placeholder="comment"></textarea>
-                <button className="btn  btn-neutral  btn-sm md:btn-md">
+                <button className="btn dark:btn-info dark:text-white btn-neutral  btn-sm md:btn-md">
                   submit
                 </button>
          </form>

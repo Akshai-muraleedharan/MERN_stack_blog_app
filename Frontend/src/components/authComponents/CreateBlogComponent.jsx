@@ -95,21 +95,21 @@ const CreateBlogComponent = ({blogCreate,fetchSinglePage,view,setView,fetchData,
 
    <>
     <p className='relative'>
-       {view ? <button className="btn btn-md btn-circle btn-ghost absolute right-0 top-1 " onClick={closeEditBlog} >✕</button> : null} 
+       {view ? <button className="btn btn-md btn-circle btn-ghost absolute right-0 top-1 dark:text-white dark:hover:bg-gray-400 " onClick={closeEditBlog} >✕</button> : null} 
     </p>
   
-    <h1 className='text-center mt-10 font-semibold text-2xl'>{view ? "Edit Blog" : "Create Blog"}</h1>
+    <h1 className='text-center mt-10 font-semibold text-2xl dark:text-white'>{view ? "Update Blog" : "Create Blog"}</h1>
 
   <form className='mt-20 flex mb-20 flex-col'onSubmit={view ? handleSubmit(editBlog) : handleSubmit(onSubmit)} >
 
-  <legend className="fieldset-legend ">Enter Blog Title</legend>
-  <input type="text" className="input mb-5 w-full"  defaultValue={view ? fetchData.title : ""} {...register("title")} name="title" placeholder="Type here" />
+  <legend className="fieldset-legend dark:text-white">Enter Blog Title</legend>
+  <input type="text" className="input mb-5 w-full dark:bg-gray-300"  defaultValue={view ? fetchData.title : ""} {...register("title")} name="title" placeholder="Type here" />
   
-  <legend className="fieldset-legend ">Add Image</legend>
-  <input type="file" {...register("image")} name="image" className="file-input file-input-neutral mb-5 w-full" />
+  <legend className="fieldset-legend dark:text-white">Add Image</legend>
+  <input type="file" {...register("image")} name="image" className="file-input dark:bg-gray-300 file-input-neutral mb-5 w-full" />
 
-  <legend className="fieldset-legend" >Select Category</legend>
-  <select defaultValue={"select"} {...register("category")} name="category" className="select w-full mb-5">
+  <legend className="fieldset-legend dark:text-white" >Select Category</legend>
+  <select defaultValue={"select"} {...register("category")} name="category" className="select dark:bg-gray-300 w-full mb-5">
   <option className={view ? "text-red-500" : ""} disabled={view ? "" : true}>{view ? fetchData.category.toUpperCase() : "Select"}</option>
     {view ? category.filter(item => item.toLowerCase() !== fetchData.category).map((item) => (
         <option key={item}>{item}</option>
@@ -118,7 +118,7 @@ const CreateBlogComponent = ({blogCreate,fetchSinglePage,view,setView,fetchData,
     ))}
   </select>
   
-  <legend className="fieldset-legend ">Enter Blog Content</legend>
+  <legend className="fieldset-legend dark:text-white">Enter Blog Content</legend>
     <JoditEditor 
     ref={editor}
     value={view ? sanitizedContent :  content}
@@ -129,8 +129,8 @@ const CreateBlogComponent = ({blogCreate,fetchSinglePage,view,setView,fetchData,
     
     />
 
-   { view && <button disabled={loadingUpdate} className="btn btn-neutral mt-5">{loadingUpdate ? "Loading..." : "Submit"}</button>}
-   { view ? null :<button disabled={loading} className="btn btn-neutral mt-5">{loading ? "Loading..." : "Submit"}</button> }
+   { view && <button disabled={loadingUpdate} className="btn dark:btn-info btn-neutral mt-5 ">{loadingUpdate ? "Loading..." : "Submit"}</button>}
+   { view ? null :<button disabled={loading} className="btn dark:btn-info btn-neutral mt-5">{loading ? "Loading..." : "Submit"}</button> }
     <ToastContainer /> 
       </form>
  </>

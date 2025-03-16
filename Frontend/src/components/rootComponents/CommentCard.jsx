@@ -22,9 +22,9 @@ const CommentCard = ({checkComment,dateConvert,setCommentBox,updateComment,userD
                 
                 <ul key={item._id}>
                 <li className='my-4'>
-                    <p className='font-semibold flex place-items-center gap-1'>{item.username} <FaCircleDot className="text-[6px]"/> <span className='text-xs font-medium text-gray-400' >{dateConvert(item.createdAt.slice(5,10))}</span></p>
+                    <p className='font-semibold flex place-items-center gap-1 dark:text-white'>{item.username} <FaCircleDot className="text-[6px]"/> <span className='text-xs font-medium text-gray-400' >{dateConvert(item.createdAt.slice(5,10))}</span></p>
 
-                    <p className='my-3 text-lg'>{item.comment}</p>
+                    <p className='my-3 text-lg dark:text-white'>{item.comment}</p>
                    <div className='flex justify-end gap-2.5'>
                    { item.userId === user.userId && <button onClick={() => editComment(item._id)} className='text-blue-500 cursor-pointer'>edit</button> }
                    { item.userId === user.userId && <button onClick={() => deleteComment(item._id)} className='text-red-500 cursor-pointer'>Delete</button>}

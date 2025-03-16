@@ -39,18 +39,18 @@ const SignupPage = () => {
   return (
     <>
 
-          <h2 className='text-center mt-5 font-bold text-3xl'> Signup</h2>
+          <h2 className='text-center mt-5 font-bold text-3xl dark:text-white text-black'> Signup</h2>
              
             
-             <form onSubmit={handleSubmit(onSubmit)} className="fieldset w-xs bg-base-200 border border-base-300 p-4 mt-5 mb-8 mx-auto rounded-box">
+             <form onSubmit={handleSubmit(onSubmit)} className="fieldset w-xs bg-base-200 dark:bg-[#21303c]  dark:border-0  border border-base-300 p-4 mt-5 mb-8 mx-auto rounded-box">
 
-                <label className="fieldset-label">Username</label>
+                <label className="fieldset-label dark:text-white text-black">Username</label>
                 <input type="text" {...register('username')} name={"username"} className="input" placeholder="username" />
                 
-                <label className="fieldset-label">Email</label>
+                <label className="fieldset-label dark:text-white text-black">Email</label>
                 <input type="text" {...register('email')} name={"email"}  className="input" placeholder="Email" />
 
-                <label className="fieldset-label">Password</label>   
+                <label className="fieldset-label dark:text-white text-black">Password</label>   
                 <input type="password" {...register('password')} name={"password"} className="input" placeholder="Password" />
 
 
@@ -59,8 +59,8 @@ const SignupPage = () => {
                 <div className='w-full text-end text-red-500 h-5'>{err && err}</div>
 
                 <div className='flex gap-1 items-center mt-2'>
-                <p>you have an account? </p>
-                <Link to={"/login"}> <span className='text-xs text-blue-500 cursor-pointer'>Login</span> </Link>
+                <p className='dark:text-white text-black'>you have an account? </p>
+                <Link to={"/login"}> <span className='text-xs dark:text-blue-400 text-blue-500 cursor-pointer'>Login</span> </Link>
                 </div>
 
                 <div className="divider">or</div>

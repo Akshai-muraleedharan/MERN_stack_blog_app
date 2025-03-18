@@ -1,15 +1,14 @@
 import { useState } from 'react'
-
-import useAuthStore from '../../store/authStore'
 import { useNavigate } from 'react-router-dom'
-import { userLogin } from '../../services/userServices'
-
 import LoginComponent from '../../components/rootComponents/LoginComponent'
-const LoginPage = () => {
+import { adminLogin } from '../../services/adminSevices'
+import useAdminAuthStore from '../../store/adminStore'
 
-  
-  const setUser = useAuthStore((state) => state.setUser)
-  const {isLoading,setLoading} = useAuthStore()
+
+const AdminLogin = () => {
+
+  const setadmin = useAdminAuthStore((state) => state.setadmin)
+  const {isLoading,setLoading} = useAdminAuthStore()
   const [err,seterr] = useState(null)
 
 
@@ -22,10 +21,12 @@ const LoginPage = () => {
    const authLogin = async (data) => {
         try {
           setLoading(true)
-          const response = await userLogin(data)
+          const response = await adminLogin(data)
+
+          
           if(response.success === true){
-            setUser(response.data)
-            navigate("/blog")
+            setadmin(response.data)
+            navigate("/admin")
           }
           
           setLoading(false)
@@ -39,10 +40,10 @@ const LoginPage = () => {
   return (
 
    <>
-     <h2 className='text-center mt-5 font-bold text-3xl dark:text-white text-black'>Login</h2>
+     <h2 className='text-center mt-5 font-bold text-3xl dark:text-white text-black'>Admin Login</h2>
     <LoginComponent isLoading={isLoading} err={err} authLogin={authLogin} />
    </>
   )
 }
 
-export default LoginPage
+export default AdminLogin

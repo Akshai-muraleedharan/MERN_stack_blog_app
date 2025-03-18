@@ -3,6 +3,10 @@ import { createBrowserRouter } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
 import Loader from '../components/commonComponents/Loader'
 import AuthProfilePage from '../pages/authpage/AuthProfilePage'
+import AdminLayout from '../layout/AdminLayout'
+import ProtectedRouteAdmin from './ProtectedRouteAdmin'
+import AdminHomePage from '../pages/authAdminPage/AdminHomePage'
+import AdminLogin from '../pages/rootpage/AdminLogin'
 
 
 
@@ -43,9 +47,14 @@ export const router = createBrowserRouter([
         {
           path:"/signup",
           element:<SignupPage />
-        },{
+        },
+        {
           path:"/blog/:id",
           element:<SingleListPage />
+        },
+        {
+          path:"/admin/login",
+          element:<AdminLogin />
         }
         
       ]
@@ -86,5 +95,21 @@ export const router = createBrowserRouter([
     ]
 
 
-   }  
+   } ,
+   {
+    path:"/admin",
+    element:(
+      <ProtectedRouteAdmin>
+        < AdminLayout />
+      </ProtectedRouteAdmin>
+      ),
+
+    children:[
+      {
+        path:"",
+        element: <AdminHomePage />
+      }
+    ]
+
+   } 
 ])

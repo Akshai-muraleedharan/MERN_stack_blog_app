@@ -10,9 +10,9 @@ adminRoute.post('/login',AdminLogin)
 
 
 adminRoute.get('/test',checkadmin,configTest)
-adminRoute.get('/blog/total',checkadmin,blogCount)
-adminRoute.get('/user/total',checkadmin,userCount)
-adminRoute.get('/approved/blog/total',checkadmin,approvedBlogs)
+adminRoute.get('/total/blog',checkadmin,blogCount)
+adminRoute.get('/total/user',checkadmin,userCount)
+adminRoute.get('/approved/blogs',checkadmin,approvedBlogs)
 adminRoute.delete('/blogs/:blogId',checkadmin,adminDeleteBlog)
 
 // pagination

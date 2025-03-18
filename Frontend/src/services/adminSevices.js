@@ -19,7 +19,7 @@ import { axiosInstance } from "./api";
     export const totalBlogs = async () => {
         try {
 
-            const response = await axiosInstance.get('/admin/blog/total')
+            const response = await axiosInstance.get('/admin/total/blog')
             return response?.data
         } catch (error) {
             console.error("Registration error:", error.response?.data || error.message);
@@ -31,7 +31,7 @@ import { axiosInstance } from "./api";
     export const totaluser = async () => {
         try {
 
-            const response = await axiosInstance.get('/admin/user/total')
+            const response = await axiosInstance.get('/admin/total/user')
             return response?.data
         } catch (error) {
             console.error("Registration error:", error.response?.data || error.message);
@@ -43,7 +43,7 @@ import { axiosInstance } from "./api";
     export const approvedBlogs = async () => {
         try {
 
-            const response = await axiosInstance.get('/admin/approved/blog/total')
+            const response = await axiosInstance.get('/admin/approved/blogs')
             return response?.data
         } catch (error) {
             console.error("Registration error:", error.response?.data || error.message);

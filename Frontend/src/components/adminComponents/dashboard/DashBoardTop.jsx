@@ -1,6 +1,19 @@
 import React from 'react'
 
-const DashBoardTop = () => {
+const DashBoardTop = ({BlogsTotal,userTotal,approvedBlog}) => {
+
+
+  const date = new Date()
+
+  const getYear = date.getFullYear()
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+  const month = date.getMonth() + 1
+  const monthWord = months[month - 1]
+
+  const getUserPercentage =  userTotal / 100 
+  const getApprovedBlogs =  approvedBlog / 100
+  
+  
   return (
     <div className="stats shadow gap-5 flex my-5 flex-col md:flex-row">
    
@@ -19,8 +32,8 @@ const DashBoardTop = () => {
         </svg>
       </div>
       <div className="stat-title">Total Blogs</div>
-      <div className="stat-value">1</div>
-      <div className="stat-desc">Jan 1st - Feb 1st</div>
+      <div className="stat-value">{BlogsTotal}</div>
+      <div className="stat-desc">{`${monthWord} ${getYear}`}</div>
     </div>
   
     <div className="stat">
@@ -38,8 +51,8 @@ const DashBoardTop = () => {
         </svg>
       </div>
       <div className="stat-title">New Users</div>
-      <div className="stat-value">4,200</div>
-      <div className="stat-desc">↗︎ 400 (22%)</div>
+      <div className="stat-value">{userTotal}</div>
+      <div className="stat-desc">({`${getUserPercentage}%`})</div>
     </div>
   
     <div className="stat">
@@ -56,9 +69,9 @@ const DashBoardTop = () => {
             d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
         </svg>
       </div>
-      <div className="stat-title">New Registers</div>
-      <div className="stat-value">1,200</div>
-      <div className="stat-desc">↘︎ 90 (14%)</div>
+      <div className="stat-title">Approved blogs</div>
+      <div className="stat-value">{approvedBlog}</div>
+      <div className="stat-desc">({`${getApprovedBlogs}%`})</div>
     </div>
   </div>
   )

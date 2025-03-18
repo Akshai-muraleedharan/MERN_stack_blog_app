@@ -7,7 +7,7 @@ const LoginComponent = ({authLogin,err,isLoading}) => {
 
     const {register,handleSubmit} = useForm()
 
-
+        console.log(isLoading)
     const onSubmit =(data) => {
         authLogin(data)
     }

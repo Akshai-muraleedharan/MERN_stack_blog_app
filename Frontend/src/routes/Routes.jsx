@@ -7,6 +7,7 @@ import AdminLayout from '../layout/AdminLayout'
 import ProtectedRouteAdmin from './ProtectedRouteAdmin'
 import AdminHomePage from '../pages/authAdminPage/AdminHomePage'
 import AdminLogin from '../pages/rootpage/AdminLogin'
+import UserListPage from '../pages/authAdminPage/UserListPage'
 
 
 
@@ -108,6 +109,10 @@ export const router = createBrowserRouter([
       {
         path:"",
         element: <AdminHomePage />
+      },
+      {
+        path:"userlist",
+        element:<UserListPage />
       }
     ]
 

@@ -11,9 +11,9 @@
 
     const corsOption = {
         origin:  process.env.FRONTENDURL ||"http://localhost:5173",
-        // origin:  "http://localhost:5173",
+        //  origin:  "http://localhost:5173",
         credentials:true
-    }
+    } 
 
     app.use(helmet())
     app.use(express.json())

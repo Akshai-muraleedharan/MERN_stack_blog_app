@@ -17,7 +17,7 @@ const handleClick = (index) => {
 }
     const sideBar_link =[
       {id:1, path:'',name:"Dashboard", icon:LuBox},
-      {id:2, path:'users',name:"Users", icon:TbUsers},
+      {id:2, path:'userlist',name:"Users", icon:TbUsers},
       {id:4, path:'movies',name:"Movies", icon:BiCameraMovie},
       {id:5, path:'theaters',name:"theaters", icon:GiTheater},
       // {id:6, path:'/work',name:"Work plan", icon:SlCalender}

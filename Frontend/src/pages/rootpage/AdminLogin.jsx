@@ -19,11 +19,9 @@ const AdminLogin = () => {
 
 
    const authLogin = async (data) => {
-        try {
           setLoading(true)
-          const response = await adminLogin(data)
-
-          
+        try {
+          const response = await adminLogin(data)  
           if(response.success === true){
             setadmin(response.data)
             navigate("/admin")

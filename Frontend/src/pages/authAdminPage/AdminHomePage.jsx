@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import DashBoardTop from '../../components/adminComponents/dashboard/DashBoardTop'
-import { approvedBlogs, totalBlogs, totaluser } from '../../services/adminSevices'
+import { approvedBlogs, productionTest, totalBlogs, totaluser } from '../../services/adminSevices'
 import useAdminAuthStore from '../../store/adminStore'
 
 
@@ -65,12 +65,23 @@ const AdminHomePage = () => {
       }
     }
   }
+
+     const testProduction = async () => {
+          try {
+              const res = await productionTest()
+
+              console.log(res)
+          } catch (error) {
+            console.log(error)
+          }
+     }
  
 
   useEffect(() => {
     fetchTotalBlogs()
     fetchTotalUser()
     fetchApprovedBlogs()
+    testProduction()
   },[])
 
 

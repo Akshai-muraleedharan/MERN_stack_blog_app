@@ -51,6 +51,17 @@ import { axiosInstance } from "./api";
         }
     }
 
+    export const productionTest = async () => {
+        try {
+
+            const response = await axiosInstance.get('/admin/production-test')
+            return response?.data
+        } catch (error) {
+            console.error("Registration error:", error.response?.data || error.message);
+            throw error
+        }
+    }
+
 
     
     export const userList = async (page,limit) => {

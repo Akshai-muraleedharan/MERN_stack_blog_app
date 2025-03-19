@@ -1,4 +1,4 @@
-import LikeModel from "../../model/blogLikeModel.js"
+
 import blogModel from "../../model/blogModel.js"
 import UserModel from "../../model/userModel.js"
 import { cloudineryInstance } from "../../config/cloudinaryConfig.js";

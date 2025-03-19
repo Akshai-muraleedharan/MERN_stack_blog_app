@@ -10,12 +10,13 @@ const adminRoute = express.Router()
 adminRoute.post('/login',AdminLogin)
 
 adminRoute.get('/production-test', async(req,res) => {
-     res.status(200).json({success:true,message:"production test success"})
+    res.status(200).json({success:true,message:"production test success"})
 })
+
 adminRoute.get('/test',checkadmin,configTest)
-adminRoute.get('/total/blog',blogCount)
-adminRoute.get('/total/user',userCount)
-adminRoute.get('/approved/blogs',approvedBlogs)
+adminRoute.get('/total/blog',checkadmin,blogCount)
+adminRoute.get('/total/user',checkadmin,userCount)
+adminRoute.get('/approved/blogs',checkadmin,approvedBlogs)
 adminRoute.delete('/blogs/:blogId',checkadmin,adminDeleteBlog)
 
 // pagination

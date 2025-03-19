@@ -58,11 +58,11 @@ export const AdminLogin = async (req,res) => {
 
     export const configTest = async (req,res) => {
           try {
-            const {email,password} = req.body
+            
   
          const {adminId} = req.adminId
      
-            res.status(200).json({success:true,message:"data upload successfully",email,password})
+            res.status(200).json({success:true,message:"data upload successfully",adminId})
           } catch (error) {
             return res.status(error.status || 400).json(error.message || "internal server error")
           }

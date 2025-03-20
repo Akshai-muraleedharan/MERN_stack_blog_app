@@ -5,7 +5,7 @@ const CommentCard = ({checkComment,dateConvert,setCommentBox,updateComment,userD
 
 
   const {user} = useAuthStore()
-
+   console.log(user.userId)
   const editComment = (id) => {   
      updateComment(id) 
      setCommentBox(true)
@@ -26,8 +26,8 @@ const CommentCard = ({checkComment,dateConvert,setCommentBox,updateComment,userD
 
                     <p className='my-3 text-lg dark:text-white'>{item.comment}</p>
                    <div className='flex justify-end gap-2.5'>
-                   { item.userId === user.userId && <button onClick={() => editComment(item._id)} className='text-blue-500 cursor-pointer'>edit</button> }
-                   { item.userId === user.userId && <button onClick={() => deleteComment(item._id)} className='text-red-500 cursor-pointer'>Delete</button>}
+                   { item.userId === user.userId  && <button onClick={() => editComment(item._id)} className='text-blue-500 cursor-pointer'>edit</button> }
+                   { item.userId === user.userId  && <button onClick={() => deleteComment(item._id)} className='text-red-500 cursor-pointer'>Delete</button>}
                    </div>
                 </li>
                 </ul>

@@ -4,7 +4,7 @@ import LikeAndComment from './LikeAndComment';
 import AuthLikeAndComment from '../authComponents/AuthLikeAndComment';
 import useAuthStore from '../../store/authStore';
 import CommentTextArea from '../authComponents/CommentTextArea';
-const SingleListCard = ({userUpdateComment,sanitizedContent,fetchData,dateConvert,userDeleteComment,loadMore,blogId,setLiked,addLike,likedBlog,userClick,unLike,addComment,commentBox,setCommentBox,postComment,checkComment,updateComment,commentForUpdate,setCommentForUpdate}) => {
+const SingleListCard = ({userUpdateComment,sanitizedContent,fetchData,buttonLoading,dateConvert,userDeleteComment,loadMore,blogId,setLiked,addLike,likedBlog,userClick,unLike,addComment,commentBox,setCommentBox,postComment,checkComment,updateComment,commentForUpdate,setCommentForUpdate}) => {
     
     const {user} = useAuthStore()
 
@@ -37,7 +37,7 @@ const SingleListCard = ({userUpdateComment,sanitizedContent,fetchData,dateConver
             <h3 className='font-semibold dark:text-white text-black'>Comments</h3>
                 
              <div className='flex flex-col items-center'>
-             { user && commentBox  ? <CommentTextArea userUpdateComment={userUpdateComment} setCommentForUpdate={setCommentForUpdate} commentForUpdate={commentForUpdate} setCommentBox={setCommentBox} postComment={postComment}/>  : checkComment.length === 0 ? <p className='dark:text-white text-black'>No Comment</p>  :  <CommentCard setCommentForUpdate={setCommentForUpdate} updateComment={updateComment} setCommentBox={setCommentBox} checkComment={checkComment} userDeleteComment={userDeleteComment} dateConvert={dateConvert} />   }
+             { user && commentBox  ? <CommentTextArea buttonLoading={buttonLoading} userUpdateComment={userUpdateComment} setCommentForUpdate={setCommentForUpdate} commentForUpdate={commentForUpdate} setCommentBox={setCommentBox} postComment={postComment}/>  : checkComment.length === 0 ? <p className='dark:text-white text-black'>No Comment</p>  :  <CommentCard setCommentForUpdate={setCommentForUpdate} updateComment={updateComment} setCommentBox={setCommentBox} checkComment={checkComment} userDeleteComment={userDeleteComment} dateConvert={dateConvert} />   }
             </div>  
             </div>
     </div>

@@ -20,7 +20,6 @@ const UserListPage = () => {
    const SetAdminNoToken = useAdminAuthStore((state) => state.SetAdminNoToken)
 
   const fetchUserList = async () => {
-      // setLoading(true)
        try{
          const res = await userList(currentPage,limit)
          setUserData(res?.data)

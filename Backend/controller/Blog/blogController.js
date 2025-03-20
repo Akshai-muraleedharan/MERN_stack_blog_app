@@ -104,7 +104,8 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
                 author:userId,
                 image:uploadResult.secure_url,
                 imageId:uploadResult.public_id,
-                category:categToLowerCase
+                category:categToLowerCase,
+                
              },{new:true})
 
             

@@ -8,6 +8,7 @@ import ProtectedRouteAdmin from './ProtectedRouteAdmin'
 import AdminHomePage from '../pages/authAdminPage/AdminHomePage'
 import AdminLogin from '../pages/rootpage/AdminLogin'
 import UserListPage from '../pages/authAdminPage/UserListPage'
+import BlogListPage from '../pages/authAdminPage/BlogListPage'
 
 
 
@@ -113,6 +114,10 @@ export const router = createBrowserRouter([
       {
         path:"userlist",
         element:<UserListPage />
+      },
+      {
+        path:"bloglist",
+        element:<BlogListPage />
       }
     ]
 

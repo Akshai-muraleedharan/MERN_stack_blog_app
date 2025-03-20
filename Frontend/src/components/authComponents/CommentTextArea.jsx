@@ -1,12 +1,14 @@
 import React from 'react'
 import {useForm} from "react-hook-form"
 
-const CommentTextArea = ({setCommentBox,postComment,commentForUpdate,setCommentForUpdate,userUpdateComment}) => {
+const CommentTextArea = ({buttonLoading,setCommentBox,postComment,commentForUpdate,setCommentForUpdate,userUpdateComment}) => {
 
   const closeBox = () => {
      setCommentBox(false)
      setCommentForUpdate(null)
   }
+
+  
 
   const {register,handleSubmit} = useForm()
 
@@ -28,7 +30,7 @@ const CommentTextArea = ({setCommentBox,postComment,commentForUpdate,setCommentF
    
           <form className="fieldset mt-10" onSubmit={commentForUpdate ? handleSubmit(onCommentUpdate) : handleSubmit(onCommentadd)}>
               <textarea {...register("comment")} className="textarea w-3xs sm:w-xl xl:w-3xl" defaultValue={commentForUpdate ? commentForUpdate.comment : ""} name={"comment"} placeholder="comment"></textarea>
-                <button className="btn dark:btn-info dark:text-white btn-neutral  btn-sm md:btn-md">
+                <button disabled={buttonLoading} className="btn dark:btn-info dark:text-white btn-neutral  btn-sm md:btn-md">
                   submit
                 </button>
          </form>

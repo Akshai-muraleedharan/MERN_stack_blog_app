@@ -99,8 +99,14 @@ import UserModel from "../../model/userModel.js";
               sameSite: 'none',
           }) 
 
+          const userlist = {
+            username:accountExist.username,
+            userId:accountExist._id,
+            
+         }
 
-        res.status(200).json({success:true,message:"logged",data:accountExist})
+
+        res.status(200).json({success:true,message:"logged",data:userlist})
         
       } catch (error) {
         return res.status(error.status || 400).json(error.message || "internal server error")

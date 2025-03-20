@@ -51,16 +51,7 @@ import { axiosInstance } from "./api";
         }
     }
 
-    export const productionTest = async () => {
-        try {
 
-            const response = await axiosInstance.get('/admin/production-test')
-            return response?.data
-        } catch (error) {
-            console.error("Registration error:", error.response?.data || error.message);
-            throw error
-        }
-    }
 
 
     
@@ -87,5 +78,29 @@ import { axiosInstance } from "./api";
             throw error
         }
     }
+
+
+
+
+    export const blogList = async (page,limit) => {
+        try {
+
+            const response = await axiosInstance.get(`/admin/blogs/page?page=${page}&limit=${limit}`)
+            return response?.data
+        } catch (error) {
+            console.error("Registration error:", error.response?.data || error.message);
+            throw error
+        }
+    }
     
+
+    export const authCommentDelete = async (commentId) => {
+        try {
+          const response = await axiosInstance.delete(`/admin/comment/${commentId}`)
+          return response?.data
+        } catch (error) {
+            console.error("blog error:", error.response?.data || error.message);
+            throw error
+        } 
+      }
     

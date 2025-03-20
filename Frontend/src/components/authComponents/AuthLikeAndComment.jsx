@@ -8,7 +8,7 @@ const AuthLikeAndComment = ({addLike,likedBlog,userClick,unLike,addComment,check
        const {user} = useAuthStore()
         
        const checkUserAddComment = checkComment.find(item => item.userId === user.userId)
-
+  
        
   return (
     <div className='gap-5 flex items-center'>    

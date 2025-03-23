@@ -1,26 +1,28 @@
-import React, { useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import JoditEditor from 'jodit-react'
 import {useForm} from 'react-hook-form'
 import {ToastContainer,toast} from "react-toastify"
 import { authUpdateBlog } from '../../services/blogServices'
 import useAuthStore from '../../store/authStore'
+import useThemeStore from '../../store/themeStore'
 const CreateBlogComponent = ({blogCreate,fetchSinglePage,view,setView,fetchData,sanitizedContent,loading}) => {
 
     const {register,handleSubmit} = useForm()
    
     const editor = useRef(null);
         const [content, setContent] = useState('');
-        
-        const SetUserNoToken = useAuthStore((state) => state.SetUserNoToken)
+        const {theme} = useThemeStore()
+        const SetUserNoToken = useAuthStore((state) => state.SetUserNoToken) 
         const [loadingUpdate, setLoadingUpdate] = useState(false)
 
         const config = useMemo(
             () => ({
                 readonly: false, // all options from https://xdsoft.net/jodit/docs/,
                 placeholder: 'Start typings...',
+                theme:theme
                 
             }),
-            []
+            [theme]
         );
 
         // create blog
@@ -61,8 +63,7 @@ const CreateBlogComponent = ({blogCreate,fetchSinglePage,view,setView,fetchData,
 
 
     const editBlog = async (data) => {
-         console.log(data)
-
+         
         const file = await convertUrlToImage(fetchData.image)
          const formData = new FormData()
           
@@ -98,18 +99,18 @@ const CreateBlogComponent = ({blogCreate,fetchSinglePage,view,setView,fetchData,
        {view ? <button className="btn btn-md btn-circle btn-ghost absolute right-0 top-1 dark:text-white dark:hover:bg-gray-400 " onClick={closeEditBlog} >✕</button> : null} 
     </p>
   
-    <h1 className='text-center mt-10 font-semibold text-2xl dark:text-white'>{view ? "Update Blog" : "Create Blog"}</h1>
+    <h1 className='text-center mt-10 font-semibold text-2xl dark:text-dark-heads'>{view ? "Update Blog" : "Create Blog"}</h1>
 
   <form className='mt-20 flex mb-20 flex-col'onSubmit={view ? handleSubmit(editBlog) : handleSubmit(onSubmit)} >
 
-  <legend className="fieldset-legend dark:text-white">Enter Blog Title</legend>
-  <input type="text" className="input mb-5 w-full dark:bg-gray-300"  defaultValue={view ? fetchData.title : ""} {...register("title")} name="title" placeholder="Type here" />
+  <legend className="fieldset-legend dark:text-dark-smalls-text">Enter Blog Title</legend>
+  <input type="text" className="input mb-5 w-full dark:bg-dark-inputs-bg dark:focus:border-dark-inputs-focus dark:text-dark-inputs-texts"  defaultValue={view ? fetchData.title : ""} {...register("title")} name="title" placeholder="Type here" />
   
-  <legend className="fieldset-legend dark:text-white">Add Image</legend>
-  <input type="file" {...register("image")} name="image" className="file-input dark:bg-gray-300 file-input-neutral mb-5 w-full" />
+  <legend className="fieldset-legend dark:text-dark-smalls-text">Add Image</legend>
+  <input type="file" {...register("image")} name="image" className="file-input dark:bg-dark-inputs-bg dark:focus:border-dark-inputs-focus dark:text-dark-inputs-texts file-input-neutral mb-5 w-full" />
 
-  <legend className="fieldset-legend dark:text-white" >Select Category</legend>
-  <select defaultValue={"select"} {...register("category")} name="category" className="select dark:bg-gray-300 w-full mb-5">
+  <legend className="fieldset-legend dark:text-dark-smalls-text dark:focus:border-dark-inputs-focus" >Select Category</legend>
+  <select defaultValue={"select"} {...register("category")} name="category" className="select dark:bg-dark-inputs-bg dark:text-dark-inputs-texts w-full mb-5">
   <option className={view ? "text-red-500" : ""} disabled={view ? "" : true}>{view ? fetchData.category.toUpperCase() : "Select"}</option>
     {view ? category.filter(item => item.toLowerCase() !== fetchData.category).map((item) => (
         <option key={item}>{item}</option>
@@ -129,8 +130,8 @@ const CreateBlogComponent = ({blogCreate,fetchSinglePage,view,setView,fetchData,
     
     />
 
-   { view && <button disabled={loadingUpdate} className="btn dark:btn-info btn-neutral mt-5 ">{loadingUpdate ? "Loading..." : "Submit"}</button>}
-   { view ? null :<button disabled={loading} className="btn dark:btn-info btn-neutral mt-5">{loading ? "Loading..." : "Submit"}</button> }
+   { view && <button disabled={loadingUpdate} className="btn dark:btn-primary btn-neutral mt-5 ">{loadingUpdate ? "Loading..." : "Submit"}</button>}
+   { view ? null :<button disabled={loading} className="btn dark:btn-primary btn-neutral mt-5">{loading ? "Loading..." : "Submit"}</button> }
     <ToastContainer /> 
       </form>
  </>

@@ -10,7 +10,7 @@ const AuthHeader = () => {
 
   return (
   
-    <div className="navbar dark:bg-black bg-base-100 shadow-sm px-5">
+    <div className="navbar dark:bg-dark-bg bg-base-100 shadow-sm px-5">
     
          <div className="flex-1">
                 <Link to={"/blog"} className="btn btn-ghost dark:text-white text-black pl-0 text-xl">Dev_Blogs</Link>

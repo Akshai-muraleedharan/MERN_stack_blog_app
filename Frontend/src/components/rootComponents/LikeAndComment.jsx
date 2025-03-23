@@ -11,7 +11,7 @@ const LikeAndComment = () => {
                     </Link>
 
                     <Link to={'/login'} >
-                        <button className="btn btn-neutral btn-sm ">Add comment</button>
+                        <button className="btn btn-neutral dark:btn-primary btn-sm ">Add comment</button>
                     </Link>
                 </div> 
   )

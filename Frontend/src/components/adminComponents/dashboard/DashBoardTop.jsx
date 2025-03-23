@@ -15,9 +15,9 @@ const DashBoardTop = ({BlogsTotal,userTotal,approvedBlog}) => {
   
   
   return (
-    <div className="stats shadow gap-5 flex my-5 flex-col md:flex-row">
+    <div className="stats shadow gap-5 dark:border dark:border-dark-borders-color dark:bg-dark-bg flex my-5 flex-col md:flex-row">
    
-    <div className="stat shadow ">
+    <div className="stat shadow">
       <div className="stat-figure text-secondary">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -31,12 +31,12 @@ const DashBoardTop = ({BlogsTotal,userTotal,approvedBlog}) => {
             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
       </div>
-      <div className="stat-title">Total Blogs</div>
-      <div className="stat-value">{BlogsTotal}</div>
-      <div className="stat-desc">{`${monthWord} ${getYear}`}</div>
+      <div className="stat-title dark:text-dark-heads">Total Blogs</div>
+      <div className="stat-value dark:text-dark-smalls-text">{BlogsTotal}</div>
+      <div className="stat-desc dark:text-dark-smalls-text">{`${monthWord} ${getYear}`}</div>
     </div>
   
-    <div className="stat">
+    <div className="stat dark:bg-dark-bg">
       <div className="stat-figure text-secondary">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -50,12 +50,12 @@ const DashBoardTop = ({BlogsTotal,userTotal,approvedBlog}) => {
             d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
         </svg>
       </div>
-      <div className="stat-title">New Users</div>
-      <div className="stat-value">{userTotal}</div>
-      <div className="stat-desc">({`${getUserPercentage}%`})</div>
+      <div className="stat-title dark:text-dark-heads">New Users</div>
+      <div className="stat-value dark:text-dark-smalls-text">{userTotal}</div>
+      <div className="stat-desc dark:text-dark-smalls-text">({`${getUserPercentage}%`})</div>
     </div>
   
-    <div className="stat">
+    <div className="stat dark:bg-dark-bg">
       <div className="stat-figure text-secondary">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -69,9 +69,9 @@ const DashBoardTop = ({BlogsTotal,userTotal,approvedBlog}) => {
             d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
         </svg>
       </div>
-      <div className="stat-title">Approved blogs</div>
-      <div className="stat-value">{approvedBlog}</div>
-      <div className="stat-desc">({`${getApprovedBlogs}%`})</div>
+      <div className="stat-title dark:text-dark-heads">Approved blogs</div>
+      <div className="stat-value dark:text-dark-smalls-text">{approvedBlog}</div>
+      <div className="stat-desc dark:text-dark-smalls-text">({`${getApprovedBlogs}%`})</div>
     </div>
   </div>
   )

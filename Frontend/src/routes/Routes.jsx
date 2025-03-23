@@ -9,6 +9,7 @@ import AdminHomePage from '../pages/authAdminPage/AdminHomePage'
 import AdminLogin from '../pages/rootpage/AdminLogin'
 import UserListPage from '../pages/authAdminPage/UserListPage'
 import BlogListPage from '../pages/authAdminPage/BlogListPage'
+import AdminSinglePage from '../pages/authAdminPage/AdminSinglePage'
 
 
 
@@ -118,6 +119,10 @@ export const router = createBrowserRouter([
       {
         path:"bloglist",
         element:<BlogListPage />
+      },
+      {
+        path:"blog/:id",
+        element:<AdminSinglePage />
       }
     ]
 

@@ -4,7 +4,7 @@ import commentModel from "../../model/commentModel.js";
    export const adminDeleteComment = async (req,res) => {
       try{
              const {commentId} = req.params;
-
+ 
              
 
              const deletedComment = await commentModel.findByIdAndDelete(commentId)

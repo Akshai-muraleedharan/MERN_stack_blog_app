@@ -6,7 +6,7 @@ import SideBar from '../components/adminComponents/SideBar'
 
 const AdminLayout = () => {
   return (
-    <div className='flex flex-col dark:bg-black min-h-[100vh]'>
+    <div className='flex flex-col dark:bg-dark-bg min-h-[100vh]'>
         
        <div className='flex'>
        <SideBar/>

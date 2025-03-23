@@ -10,6 +10,10 @@ const AuthSingleListPage = () => {
   const [fetchData,setFetchData] = useState({})
   const [loading,setLoading] = useState(true)
   const [buttonLoading,setButtonLoading] = useState(false)
+  const [LikeButtonLoading,setLikeButtonLoading] = useState(false)
+  const [unLikeButtonLoading,setUnLikeButtonLoading] = useState(false)
+  const [commentDeleteLoading,setcommentDeleteLoading] = useState(false)
+  const [commentEditLoading,setcommentEditLoading] = useState(false)
   const [loadMore,setLoadMore] = useState(true)
   const [checkComment,setCheckComment] = useState([])
   const [likedBlog,setLikedBlog] = useState({})
@@ -64,13 +68,15 @@ const AuthSingleListPage = () => {
   // add like to blog
   const addLike = async () => {
          try {
+          setLikeButtonLoading(true)
             await authLike(blogId.id)        
             setUserClick(true)
             fetchSingleBlog()
-            
+            setLikeButtonLoading(false)
             
          } catch (error) {
           console.log(error)
+          setLikeButtonLoading(false)
           if(error?.response?.data.message === "no token"){
             SetUserNoToken(null)
           }
@@ -80,12 +86,14 @@ const AuthSingleListPage = () => {
 
       const unLike = async () => {
         try {
+          setUnLikeButtonLoading(true)
            await authUnLike(blogId.id)        
            setUserClick(false)
            fetchSingleBlog()
-           
+           setUnLikeButtonLoading(false)
         } catch (error) {
          console.log(error)
+         setUnLikeButtonLoading(false)
          if(error?.response?.data.message === "no token"){
            SetUserNoToken(null)
          }
@@ -124,11 +132,14 @@ const AuthSingleListPage = () => {
 
      const userUpdateComment = async (id,data) => {
           try {
+            setcommentEditLoading(true)
             await authCommentUpdate(id,data)
             fetchSingleBlog()
             setCommentBox(false)
+            setcommentEditLoading(false)
           } catch (error) {
             console.log(error)
+            setcommentEditLoading(false)
             if(error?.response?.data.message === "no token"){
               SetUserNoToken(null)
             }
@@ -137,11 +148,14 @@ const AuthSingleListPage = () => {
 
      const userDeleteComment = async (id) => {
          try{
+          setcommentDeleteLoading(true)
          await  authCommentDelete(id)
              fetchSingleBlog()
             setCommentBox(false)
+            setcommentDeleteLoading(false)
          }catch(error){
           console.log(error)
+          setcommentDeleteLoading(false)
           if(error?.response?.data.message === "no token"){
             SetUserNoToken(null)
           }
@@ -170,10 +184,10 @@ const AuthSingleListPage = () => {
 
      setTimeout(()=>{ setLoadMore(false)},2000)
   return (
-    <div className="px-5 md:px-10 lg:px-32 ">
+    <div className="lg:px-32 md:px-10 px-5">
 
   
-   { loading === true ? <p className='flex justify-center mt-4'><span className="loading loading-spinner loading-md"></span></p>  : <SingleListCard sanitizedContent={sanitizedContent} buttonLoading={buttonLoading} loading={loading} userDeleteComment={userDeleteComment} userUpdateComment={userUpdateComment} postComment={postComment} commentForUpdate={commentForUpdate} setCommentBox={setCommentBox} commentBox={commentBox} checkComment={checkComment} userClick={userClick} likedBlog={likedBlog} unLike={unLike} addLike={addLike} addComment={addComment}   fetchData={fetchData} fetchSingleBlog={fetchSingleBlog}  loadMore={loadMore} dateConvert={dateConvert} blogId={blogId} updateComment={updateComment} setCommentForUpdate={setCommentForUpdate} />}
+   { loading === true ? <p className='flex justify-center mt-4'><span className="loading loading-md loading-spinner"></span></p>  : <SingleListCard commentEditLoading={commentEditLoading} commentDeleteLoading={commentDeleteLoading} unLikeButtonLoading={unLikeButtonLoading} LikeButtonLoading={LikeButtonLoading}  sanitizedContent={sanitizedContent} buttonLoading={buttonLoading} loading={loading} userDeleteComment={userDeleteComment} userUpdateComment={userUpdateComment} postComment={postComment} commentForUpdate={commentForUpdate} setCommentBox={setCommentBox} commentBox={commentBox} checkComment={checkComment} userClick={userClick} likedBlog={likedBlog} unLike={unLike} addLike={addLike} addComment={addComment}   fetchData={fetchData} fetchSingleBlog={fetchSingleBlog}  loadMore={loadMore} dateConvert={dateConvert} blogId={blogId} updateComment={updateComment} setCommentForUpdate={setCommentForUpdate} />}
    </div>
   )
 }

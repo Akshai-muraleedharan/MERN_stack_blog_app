@@ -56,9 +56,9 @@ const SingleListPage = () => {
      setTimeout(()=>{ setLoadMore(false)},3000)
 
   return (
-    <div className="px-5 md:px-10 lg:px-32 ">
+    <div className="px-5 md:px-10 lg:px-26 ">
 
-     { loading ? <p className='flex justify-center mt-4'><span className="loading loading-spinner loading-md"></span></p> : <SingleListCard sanitizedContent={sanitizedContent} checkComment={checkComment} fetchData={fetchData}  loadMore={loadMore} dateConvert={dateConvert}/>}
+     { loading ? <p className='flex justify-center mt-4'><span className="loading loading-spinner dark:bg-dark-spinners-color loading-md"></span></p> : <SingleListCard sanitizedContent={sanitizedContent} checkComment={checkComment} fetchData={fetchData}  loadMore={loadMore} dateConvert={dateConvert}/>}
     </div>
   )
 }

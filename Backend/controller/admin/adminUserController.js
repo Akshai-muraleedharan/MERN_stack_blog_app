@@ -16,3 +16,15 @@ import UserModel from "../../model/userModel.js"
             return res.status(error.status || 400).json(error.message || "internal server error")
          }
   }
+
+
+  export const adminDeleteUser = async (req,res) => {
+   try {
+      const {userId} = req.params      
+         await UserModel.findByIdAndDelete(userId)
+
+         res.status(200).json({success:true,message:"User Deleted Successfully"})
+   } catch (error) {
+      return res.status(error.status || 400).json(error.message || "internal server error")
+   }
+  }

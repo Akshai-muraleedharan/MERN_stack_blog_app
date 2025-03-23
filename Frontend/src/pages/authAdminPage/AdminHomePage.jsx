@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import DashBoardTop from '../../components/adminComponents/dashboard/DashBoardTop'
 import { approvedBlogs, totalBlogs, totaluser } from '../../services/adminSevices'
 import useAdminAuthStore from '../../store/adminStore'
+import DashBoardMostViewBlog from '../../components/adminComponents/dashboard/DashBoardMostViewBlog'
 
 
 
@@ -15,9 +16,7 @@ const AdminHomePage = () => {
   
   const SetAdminNoToken = useAdminAuthStore((state) => state.SetAdminNoToken)
 
-  
-
-  
+ 
   
   const fetchTotalBlogs = async () => {
     
@@ -78,30 +77,12 @@ const AdminHomePage = () => {
 
 
   return (
-  <div className='px-5 dark:bg-black  md:px-10 lg:px-32 w-full mb-5 bg-[#f9f9f9]'>
+  <div className='px-5 dark:bg-dark-bg  md:px-10 lg:px-32 w-full mb-5 bg-[#f9f9f9]'>
 
 {loading ? <p className='flex justify-center mt-4'><span className="loading loading-spinner loading-md"></span></p> : <DashBoardTop approvedBlog={approvedBlog} userTotal={userTotal} loading={loading} BlogsTotal={BlogsTotal} /> }
     
 
-<div className="stats stats-vertical lg:stats-horizontal shadow">
-  <div className="stat">
-    <div className="stat-title">Downloads</div>
-    <div className="stat-value">31K</div>
-    <div className="stat-desc">Jan 1st - Feb 1st</div>
-  </div>
-
-  <div className="stat">
-    <div className="stat-title">New Users</div>
-    <div className="stat-value">4,200</div>
-    <div className="stat-desc">↗︎ 400 (22%)</div>
-  </div>
-
-  <div className="stat">
-    <div className="stat-title">New Registers</div>
-    <div className="stat-value">1,200</div>
-    <div className="stat-desc">↘︎ 90 (14%)</div>
-  </div>
-</div>
+<DashBoardMostViewBlog />
   </div>
   )
 }

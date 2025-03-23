@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-
-const BlogListTable = ({blogsData,setFindOneBlog,setOpenCommentTable,setFindBlog}) => {
+import {ToastContainer} from "react-toastify"
+import {Link} from 'react-router-dom'
+const BlogListTable = ({loadingDelete,blogsData,setFindOneBlog,setOpenCommentTable,setFindBlog,deleteBlog}) => {
 
    
   const [oneBlog,setOneBlog] = useState({})
@@ -32,15 +33,24 @@ const BlogListTable = ({blogsData,setFindOneBlog,setOpenCommentTable,setFindBlog
 
       }
 
+      const userDeleteBlog = async (id) => {
+         await deleteBlog(id)
+           setTimeout(() => {
+            document.getElementById('my_modal_1').close()
+           },1000) 
+         
+            
+      }
+
 
   return (
 
     <div>
-            <div className="overflow-x-auto">
-            <table className="table table-sm">
+           {blogsData.length === 0 ? <p className='dark:text-dark-texts-color'>no data Go back</p> : <div className="overflow-x-auto">
+            <table className="table table-sm dark:bg-dark-cards-bg">
                 {/* head */}
                 <thead>
-                <tr>
+                <tr className='dark:text-dark-smalls-text'>
                     <th></th>
                     <th>Author</th>
                     <th>Title</th>
@@ -56,17 +66,17 @@ const BlogListTable = ({blogsData,setFindOneBlog,setOpenCommentTable,setFindBlog
                 </thead>
                 <tbody>
                 
-               {blogsData.map((item,index) => (
+               { blogsData.map((item,index) => (
                  <tr key={item._id}>
-                 <th>{index + 1}</th>
-                 <td >{item.author.username}</td>
-                 <td>{item.title.slice(0,40) +"..."}</td>
-                 <td>{item.category}</td>
-                 <td className='text-center font-semibold'>{item.likes}</td>
-                 <td className='text-center font-semibold'>{item.comments.length > 0 ? <button onClick={() => openComment(item._id)} className='btn btn-xs btn-outline btn-accent cursor-pointer'>{item.comments.length}</button> : item.comments.length}</td>
-                 <td className='text-center font-semibold'>{item.view}</td>
-                 <td>{ dateConvert(item.createdAt.slice(0,10))}</td>
-                 <td>{ dateConvert(item.updatedAt.slice(0,10))}</td>
+                 <td className='dark:text-dark-smalls-text text-black'>{index + 1}</td>
+                 <td className='dark:text-dark-smalls-text text-black'>{item.author.username}</td>
+                 <td className='dark:text-dark-smalls-text text-black'> <Link to={`/admin/blog/${item._id}`} className='hover:text-gray-400'>{item.title.slice(0,40) +"..."}</Link></td>
+                 <td className='dark:text-dark-smalls-text text-black'>{item.category}</td>
+                 <td className='text-center font-semibold dark:text-dark-smalls-text text-black'>{item.likes}</td>
+                 <td className='text-center font-semibold dark:text-dark-smalls-text text-black'>{item.comments.length > 0 ? <button onClick={() => openComment(item._id)} className='btn btn-accent btn-outline btn-xs cursor-pointer'>{item.comments.length}</button> : item.comments.length}</td>
+                 <td className='text-center font-semibold dark:text-dark-smalls-text text-black'>{item.view}</td>
+                 <td className='dark:text-dark-smalls-text text-black' >{ dateConvert(item.createdAt.slice(0,10))}</td>
+                 <td className='dark:text-dark-smalls-text text-black'>{ dateConvert(item.updatedAt.slice(0,10))}</td>
                  {item.published ? <td className="text-green-500">Approved</td> : <td className="text-red-500">Not Approved</td>}
                  <td><button className="text-red-500 cursor-pointer" onClick={() => openBlogModel(item._id)}>Delete</button></td>
              </tr>
@@ -75,7 +85,7 @@ const BlogListTable = ({blogsData,setFindOneBlog,setOpenCommentTable,setFindBlog
                 
                 </tbody>
             </table>
-        </div>
+        </div>}
 
        
 
@@ -83,16 +93,18 @@ const BlogListTable = ({blogsData,setFindOneBlog,setOpenCommentTable,setFindBlog
             <div className="modal-box">
                 <form method="dialog">
               
-                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                <button className="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">✕</button>
                 </form>
                 <p className="py-4">Are you Sure To Delete This Blog  ?</p>
                 
-                <h3 className="font-bold text-lg">{oneBlog.title}</h3>
+                <h3 className="text-lg font-bold">{oneBlog.title}</h3>
                  <div className='flex justify-end'>
-                    <button  className="btn btn-xs btn-neutral md:btn md:btn-error ">Delete</button>
+                    <button onClick={() => userDeleteBlog(oneBlog._id)}  className="btn btn-neutral btn-xs md:btn md:btn-error">{loadingDelete ? <span className="loading loading-spinner loading-xs"></span> : "Delete"}</button>
+                   
                     </div>
             </div>
         </dialog>
+        <ToastContainer />
 </div>
   )
 }

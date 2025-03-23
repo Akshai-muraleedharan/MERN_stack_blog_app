@@ -6,7 +6,7 @@ import ScrollToTop from '../components/commonComponents/ScrollToTop'
 
 const RooyLayout = () => {
   return (
-   <div className='flex flex-col min-h-[100vh] dark:bg-black'>
+   <div className='flex flex-col min-h-[100vh] dark:bg-dark-bg'>
      <Header />
         <Outlet />
      <Footer />

@@ -70,7 +70,6 @@ import { axiosInstance } from "./api";
      
     export const blogDelete = async (id) => {
         try {
-
             const response = await axiosInstance.delete(`/admin/blogs/${id}`)
             return response?.data
         } catch (error) {
@@ -104,3 +103,48 @@ import { axiosInstance } from "./api";
         } 
       }
     
+
+      
+    export const authSingleBlog = async (id) => {
+        try {
+          const response = await axiosInstance.get(`/admin/single-blog/${id}`)
+          return response?.data
+        } catch (error) {
+            console.error("blog error:", error.response?.data || error.message);
+            throw error
+        } 
+      }
+
+
+      export const authAdminApproval = async (id) => {
+        try {
+          const response = await axiosInstance.put(`/admin/blog-approval/${id}`)
+          return response?.data
+        } catch (error) {
+            console.error("blog error:", error.response?.data || error.message);
+            throw error
+        } 
+      }
+
+
+      
+      export const authAdminNotApproval = async (id) => {
+        try {
+          const response = await axiosInstance.put(`/admin/blog/not-approval/${id}`)
+          return response?.data
+        } catch (error) {
+            console.error("blog error:", error.response?.data || error.message);
+            throw error
+        } 
+      }
+
+
+      export const authAdminUserDelete = async (id) => {
+        try {
+          const response = await axiosInstance.delete(`/admin/user/delete/${id}`)
+          return response?.data
+        } catch (error) {
+            console.error("blog error:", error.response?.data || error.message);
+            throw error
+        } 
+      }

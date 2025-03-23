@@ -21,22 +21,22 @@ const AuthUserProfileComponent = ({ClickedInput,userDetails,ButtonOpen}) => {
     }
   return (
     
-                <fieldset className=" mx-auto mt-10 fieldset w-xs dark:bg-[#21303c] dark:border-0 bg-base-200 border border-base-300 p-4 rounded-box">
+                <fieldset className=" mx-auto mt-10 fieldset w-xs dark:bg-dark-cards-bg dark:border-0 bg-base-200 border border-base-300 p-4 rounded-box">
                                 
                                 
-                <label className="fieldset-label dark:text-white text-black">Username</label>
+                <label className="fieldset-label dark:text-dark-smalls-text text-black">Username</label>
                 <input type="text" className="input dark:bg-gray-300 " onClick={ClickedInput} defaultValue={userDetails.username} placeholder="My awesome page" />
                 
-                <label className="fieldset-label dark:text-white text-black">Email</label>
+                <label className="fieldset-label dark:text-dark-smalls-text text-black">Email</label>
                 <input type="text" className="input dark:bg-gray-300 " onClick={ClickedInput} defaultValue={userDetails.email} placeholder="my-awesome-page" />
                 
             {  ButtonOpen &&<>
-                <label className="fieldset-label dark:text-white text-black">Password</label>
+                <label className="fieldset-label dark:text-dark-smalls-text text-black">Password</label>
                 <input type="text" className="input dark:bg-gray-300 " onClick={ClickedInput} placeholder="password" />
             </> }
                 
             { ButtonOpen && <> 
-            <label className="fieldset-label dark:text-white text-black">Confirm Password</label>
+            <label className="fieldset-label dark:text-dark-smalls-text text-black">Confirm Password</label>
                 <input type="text" className="input dark:bg-gray-300 " onClick={ClickedInput} placeholder="password" /> 
                 </>}
 

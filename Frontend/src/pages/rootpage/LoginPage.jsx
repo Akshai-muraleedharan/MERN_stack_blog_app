@@ -39,7 +39,7 @@ const LoginPage = () => {
   return (
 
    <>
-     <h2 className='text-center mt-5 font-bold text-3xl dark:text-white text-black'>Login</h2>
+     <h2 className='text-center mt-5 font-bold text-3xl dark:text-dark-heads text-black'>Login</h2>
     <LoginComponent isLoading={isLoading} err={err} authLogin={authLogin} />
    </>
   )

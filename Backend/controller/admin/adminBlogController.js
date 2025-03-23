@@ -61,6 +61,28 @@ import { cloudineryInstance } from "../../config/cloudinaryConfig.js";
    }
 }
 
+
+    export const adminAuthSingleBlogData = async (req,res) => {
+
+      try {
+      
+        const {blogId} = req.params
+        
+            if(!blogId){
+              return res.status(400).json({success:false,message:"blog Id not get"})
+            }
+
+        const fetchBlog = await blogModel.findById(blogId).populate("author",'-password')
+        
+
+        
+        res.status(200).json({success:true,message:"data fetched",data:fetchBlog ,})
+
+      } catch (error) {
+        return res.status(error.status || 400).json(error.message || "internal server error")
+      }
+    }
+
  
 
 
@@ -70,7 +92,7 @@ import { cloudineryInstance } from "../../config/cloudinaryConfig.js";
           const {blogId} = req.params
   
         const blog = await blogModel.findByIdAndDelete(blogId)
-  
+               
          await  cloudineryInstance.uploader.destroy(blog.imageId).catch((error) => {
           return res.status(400).json({success:false,message:error})
         })
@@ -80,3 +102,45 @@ import { cloudineryInstance } from "../../config/cloudinaryConfig.js";
           return res.status(error.status || 400).json(error.message || "internal server error")
          }
       }
+
+
+
+      export const adminblogApproval = async (req,res) => {
+
+         try {
+         
+           const {blogId} = req.params
+           
+               if(!blogId){
+                 return res.status(400).json({success:false,message:"blog Id not get"})
+               }
+   
+           await blogModel.findByIdAndUpdate(blogId,{
+            published:true
+           },{new:true})          
+           res.status(200).json({success:true,message:"Blog Approved"})
+   
+         } catch (error) {
+           return res.status(error.status || 400).json(error.message || "internal server error")
+         }
+       }
+
+       export const adminblogNotApproval = async (req,res) => {
+
+         try {
+         
+           const {blogId} = req.params
+           
+               if(!blogId){
+                 return res.status(400).json({success:false,message:"blog Id not get"})
+               }
+   
+           await blogModel.findByIdAndUpdate(blogId,{
+            published:false
+           },{new:true})          
+           res.status(200).json({success:true,message:"Blog Approved Cancel"})
+   
+         } catch (error) {
+           return res.status(error.status || 400).json(error.message || "internal server error")
+         }
+       }

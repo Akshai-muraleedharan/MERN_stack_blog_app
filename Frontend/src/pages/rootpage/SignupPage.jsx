@@ -39,31 +39,31 @@ const SignupPage = () => {
   return (
     <>
 
-          <h2 className='text-center mt-5 font-bold text-3xl dark:text-white text-black'> Signup</h2>
+          <h2 className='text-center mt-5 font-bold text-3xl dark:text-dark-heads text-black'> Signup</h2>
              
             
-             <form onSubmit={handleSubmit(onSubmit)} className="fieldset w-xs bg-base-200 dark:bg-[#21303c]  dark:border-0  border border-base-300 p-4 mt-5 mb-8 mx-auto rounded-box">
+             <form onSubmit={handleSubmit(onSubmit)} className="fieldset w-xs bg-base-200 dark:bg-dark-cards-bg  dark:border-0  border border-base-300 p-4 mt-5 mb-8 mx-auto rounded-box">
 
-                <label className="fieldset-label dark:text-white text-black">Username</label>
-                <input type="text" {...register('username')} name={"username"} className="input" placeholder="username" />
+                <label className="fieldset-label dark:text-dark-smalls-text text-black">Username</label>
+                <input type="text" {...register('username')} name={"username"} className="input dark:bg-dark-inputs-bg dark:text-dark-inputs-texts dark:focus dark:focus:border-dark-inputs-focus" placeholder="username" />
                 
-                <label className="fieldset-label dark:text-white text-black">Email</label>
-                <input type="text" {...register('email')} name={"email"}  className="input" placeholder="Email" />
+                <label className="fieldset-label dark:text-dark-smalls-text text-black">Email</label>
+                <input type="text" {...register('email')} name={"email"}  className="input dark:bg-dark-inputs-bg dark:text-dark-inputs-texts dark:focus dark:focus:border-dark-inputs-focus" placeholder="Email" />
 
-                <label className="fieldset-label dark:text-white text-black">Password</label>   
-                <input type="password" {...register('password')} name={"password"} className="input" placeholder="Password" />
+                <label className="fieldset-label dark:text-dark-smalls-text text-black">Password</label>   
+                <input type="password" {...register('password')} name={"password"} className="input dark:bg-dark-inputs-bg dark:text-dark-inputs-texts dark:focus dark:focus:border-dark-inputs-focus" placeholder="Password" />
 
 
-                { isLoading ? <button disabled="disabled" className="btn btn-neutral mt-4 cursor-not-allowed"><span className="loading loading-spinner loading-sm"></span> Loading...</button> : <button className="btn btn-neutral mt-4">Signup</button> }
+                { isLoading ? <button disabled="disabled" className="btn btn-neutral mt-4 cursor-not-allowed"><span className="loading loading-spinner loading-sm"></span> Loading...</button> : <button className="btn btn-neutral mt-4 dark:btn-primary">Signup</button> }
 
                 <div className='w-full text-end text-red-500 h-5'>{err && err}</div>
 
                 <div className='flex gap-1 items-center mt-2'>
-                <p className='dark:text-white text-black'>you have an account? </p>
+                <p className='dark:text-dark-paragraph text-black'>you have an account? </p>
                 <Link to={"/login"}> <span className='text-xs dark:text-blue-400 text-blue-500 cursor-pointer'>Login</span> </Link>
                 </div>
 
-                <div className="divider">or</div>
+                <div className="divider dark:text-dark-smalls-text">or</div>
 
                {/* google btn */}
                <OAuth />

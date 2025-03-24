@@ -63,7 +63,7 @@ const AuthCreateBlogPage = () => {
 	
 	{ loading && <progress className="progress progress-primary sticky top-0 w-full" value={upload} max={100} ></progress>}
 
-  <CreateBlogComponent  loading={loading}blogCreate={blogCreate} ToastContainer={ToastContainer} /> 
+  <CreateBlogComponent  loading={loading} blogCreate={blogCreate} ToastContainer={ToastContainer} /> 
 	</div>
   
  

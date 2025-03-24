@@ -70,3 +70,10 @@ export const AdminLogin = async (req,res) => {
 
 
         
+        export const adminLogOut = async (req,res) => {
+          try {
+            res.cookie("secretToken","").status(200).json({success:true,message:"user logout successfully "})
+          } catch (error) {
+            return res.status(error.status || 400).json(error.message || "internal server error")
+          }
+        }

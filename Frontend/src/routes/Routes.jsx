@@ -2,17 +2,7 @@ import React, {lazy,Suspense} from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
 import Loader from '../components/commonComponents/Loader'
-import AuthProfilePage from '../pages/authpage/AuthProfilePage'
-import AdminLayout from '../layout/AdminLayout'
 import ProtectedRouteAdmin from './ProtectedRouteAdmin'
-import AdminHomePage from '../pages/authAdminPage/AdminHomePage'
-import AdminLogin from '../pages/rootpage/AdminLogin'
-import UserListPage from '../pages/authAdminPage/UserListPage'
-import BlogListPage from '../pages/authAdminPage/BlogListPage'
-import AdminSinglePage from '../pages/authAdminPage/AdminSinglePage'
-
-
-
 
 
 
@@ -27,6 +17,16 @@ const AuthHomePage = lazy(() => import('../pages/authpage/AuthHomePage'))
 const AuthSingleListPage = lazy(() => import('../pages/authpage/AuthSingleListPage')) 
 const AuthCreateBlogPage = lazy(() => import('../pages/authpage/AuthCreateBlogPage')) 
 const AuthListPageContent = lazy(() => import('../pages/authpage/AuthListPageContent')) 
+const AuthProfilePage = lazy(() => import('../pages/authpage/AuthProfilePage')) 
+
+const AdminLayout = lazy(() => import('../layout/AdminLayout')) 
+const AdminHomePage = lazy(() => import('../pages/authAdminPage/AdminHomePage')) 
+const AdminLogin = lazy(() => import('../pages/rootpage/AdminLogin')) 
+const UserListPage = lazy(() => import('../pages/authAdminPage/UserListPage')) 
+const BlogListPage = lazy(() => import('../pages/authAdminPage/BlogListPage')) 
+const AdminSinglePage = lazy(() => import('../pages/authAdminPage/AdminSinglePage')) 
+const AdminCreateNewUser = lazy(() => import('../pages/authAdminPage/AdminCreateNewUser')) 
+const AdminBlogCreate = lazy(() => import('../pages/authAdminPage/AdminBlogCreate')) 
 
 export const router = createBrowserRouter([
   
@@ -123,6 +123,14 @@ export const router = createBrowserRouter([
       {
         path:"blog/:id",
         element:<AdminSinglePage />
+      },
+      {
+        path:"user/create",
+        element:<AdminCreateNewUser />
+      },
+      {
+        path:"blog/create",
+        element:<AdminBlogCreate />
       }
     ]
 

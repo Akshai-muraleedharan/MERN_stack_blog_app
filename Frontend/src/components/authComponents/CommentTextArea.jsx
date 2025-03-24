@@ -30,7 +30,7 @@ const CommentTextArea = ({commentEditLoading,buttonLoading,setCommentBox,postCom
    
           <form className="fieldset mt-10" onSubmit={commentForUpdate ? handleSubmit(onCommentUpdate) : handleSubmit(onCommentadd)}>
               <textarea {...register("comment")} className="w-3xs sm:w-xl dark:focus:border-dark-inputs-focus textarea dark:text-dark-inputs-texts dark:bg-dark-inputs-bg xl:w-3xl" defaultValue={commentForUpdate ? commentForUpdate.comment : ""} name={"comment"} placeholder="comment"></textarea>
-                <button disabled={commentForUpdate ? commentEditLoading : buttonLoading} className="btn btn-neutral dark:btn-primary btn-sm  dark:text-white md:btn-md">
+                <button disabled={commentForUpdate ? commentEditLoading : buttonLoading} className="btn btn-neutral dark:btn-primary btn-sm border-black dark:hover:bg-gray-600 hover:bg-gray-800 dark:border-dark-borders-color dark:text-white md:btn-md">
                   submit
                 </button>
          </form>

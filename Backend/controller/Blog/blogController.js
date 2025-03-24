@@ -108,15 +108,6 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
                 
              },{new:true})
 
-            
-
-          //  const savedBlog =   await blog.save()
-
-          //  const user = await UserModel.findById(userId)
-
-          //   user.postedBlogs.push(savedBlog._id)
-
-          //  await user.save()
 
             res.status(200).json({success:true,message:"blog create successfully",})
             

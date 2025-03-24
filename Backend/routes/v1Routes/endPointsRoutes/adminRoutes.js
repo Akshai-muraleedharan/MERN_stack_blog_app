@@ -1,9 +1,10 @@
 import express from 'express'
-import {  AdminLogin, configTest } from '../../../controller/admin/adminController.js'
+import {  AdminLogin, adminLogOut, configTest } from '../../../controller/admin/adminController.js'
 import { checkadmin } from '../../../middleware/adminAuth.js'
-import { adminAuthSingleBlogData, adminblogApproval, adminblogNotApproval, adminDeleteBlog, approvedBlogs, blogCount,  getBlogs,  userCount } from '../../../controller/admin/adminBlogController.js'
-import { adminDeleteUser, getUser } from '../../../controller/admin/adminUserController.js'
+import { adminAuthSingleBlogData, adminblogApproval, adminblogNotApproval, adminCreateBlog, adminDeleteBlog, adminMostViewBlog, approvedBlogs, blogCount,  getBlogs,  userCount } from '../../../controller/admin/adminBlogController.js'
+import { adminDeleteUser, adminUserCreate, getUser } from '../../../controller/admin/adminUserController.js'
 import { adminDeleteComment } from '../../../controller/admin/adminBlogCommentController.js'
+import { upload } from '../../../middleware/multer.js'
 
 
 
@@ -13,15 +14,20 @@ adminRoute.post('/login',AdminLogin)
 
 adminRoute.get('/total/blog',checkadmin,blogCount)
 adminRoute.get('/total/user',checkadmin,userCount)
+adminRoute.post('/log-out',checkadmin,adminLogOut)
+adminRoute.post('/user/create',checkadmin,adminUserCreate)
+adminRoute.post('/blog/create',upload.single("image"),checkadmin,adminCreateBlog)
 adminRoute.get('/single-blog/:blogId',checkadmin,adminAuthSingleBlogData)
 adminRoute.get('/approved/blogs',checkadmin,approvedBlogs)
+adminRoute.get('/blogs/views',checkadmin,adminMostViewBlog)
 adminRoute.delete('/blogs/:blogId',checkadmin,adminDeleteBlog)
 adminRoute.delete('/comment/:commentId',checkadmin,adminDeleteComment)
 adminRoute.delete('/user/delete/:userId',checkadmin,adminDeleteUser)
 
 
-adminRoute.put('/blog-approval/:blogId',adminblogApproval)
-adminRoute.put('/blog/not-approval/:blogId',adminblogNotApproval)
+adminRoute.put('/blog-approval/:blogId',checkadmin,adminblogApproval)
+adminRoute.put('/blog/not-approval/:blogId',checkadmin,adminblogNotApproval)
+
 
 
 adminRoute.get('/test',checkadmin,configTest)

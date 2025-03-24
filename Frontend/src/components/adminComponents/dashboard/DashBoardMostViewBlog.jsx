@@ -1,42 +1,29 @@
 import React from 'react'
-
-const DashBoardMostViewBlog = () => {
+import {Link} from "react-router-dom"
+const DashBoardMostViewBlog = ({mostView}) => {
   return (
     <div className='shadow rounded mt-5'> 
-    <h3 className='my-5'>Trending Blog</h3>
+   
    <div className="overflow-x-auto">
-  <table className="table">
+  <table className="table dark:bg-dark-cards-bg">
     {/* head */}
     <thead>
-      <tr>
+      <tr className='dark:text-dark-smalls-text text-black'>
         <th></th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
+        <th>Title</th>
+        <th className='text-center'>Author</th>
+        <th className='text-center'>Views</th>
       </tr>
     </thead>
     <tbody>
-      {/* row 1 */}
-      <tr>
-        <th>1</th>
-        <td>Cy Ganderton</td>
-        <td>Quality Control Specialist</td>
-        <td>Blue</td>
-      </tr>
-      {/* row 2 */}
-      <tr>
-        <th>2</th>
-        <td>Hart Hagerty</td>
-        <td>Desktop Support Technician</td>
-        <td>Purple</td>
-      </tr>
-      {/* row 3 */}
-      <tr>
-        <th>3</th>
-        <td>Brice Swyre</td>
-        <td>Tax Accountant</td>
-        <td>Red</td>
-      </tr>
+     {mostView.filter((item) => item.published === true).slice(0,5).map((item,index) => (
+       <tr key={item._id}>
+       <th className='dark:text-dark-smalls-text text-black'>{index + 1}</th>
+       <td className='dark:text-dark-smalls-text text-black'><Link to={`/admin/blog/${item._id}`}>{item.title}</Link></td>
+       <td className='dark:text-dark-smalls-text font-bold text-center text-black'>{item.author.username}</td>
+       <td className='dark:text-dark-smalls-text font-bold text-center text-black'>{item.view}</td>
+     </tr>
+     ))}
     </tbody>
   </table>
 </div>

@@ -130,8 +130,8 @@ const CreateBlogComponent = ({blogCreate,fetchSinglePage,view,setView,fetchData,
     
     />
 
-   { view && <button disabled={loadingUpdate} className="btn dark:btn-primary btn-neutral mt-5 ">{loadingUpdate ? "Loading..." : "Submit"}</button>}
-   { view ? null :<button disabled={loading} className="btn dark:btn-primary btn-neutral mt-5">{loading ? "Loading..." : "Submit"}</button> }
+   { view && <button disabled={loadingUpdate} className="btn dark:btn-primary text-white btn-neutral mt-5 ">{loadingUpdate ? "Loading..." : "Submit"}</button>}
+   { view ? null :<button disabled={loading} className="btn dark:btn-primary hover:bg-gray-600 dark:border dark:border-dark-borders-color btn-neutral text-white mt-5">{loading ? "Loading..." : "Submit"}</button> }
     <ToastContainer /> 
       </form>
  </>

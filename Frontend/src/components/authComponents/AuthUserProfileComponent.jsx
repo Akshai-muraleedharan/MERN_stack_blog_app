@@ -16,7 +16,7 @@ const AuthUserProfileComponent = ({ClickedInput,userDetails,ButtonOpen}) => {
             navigate("/login")
 
         } catch (error) {
-            console.log(logOut)
+            console.log(error)
         }
     }
   return (

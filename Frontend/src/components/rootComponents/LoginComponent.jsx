@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import {useForm} from "react-hook-form"
 import { OAuth } from '../commonComponents/OAuth.jsx'
@@ -6,8 +6,12 @@ import { OAuth } from '../commonComponents/OAuth.jsx'
 const LoginComponent = ({authLogin,err,isLoading}) => {
 
     const {register,handleSubmit} = useForm()
+    const [paths,setPaths] = useState("")
 
+       useEffect(() => {
         const route = window.location.pathname
+        setPaths(route)
+       },[])
  
     const onSubmit =(data) => {
         authLogin(data)
@@ -24,18 +28,19 @@ const LoginComponent = ({authLogin,err,isLoading}) => {
             <input type="password" {...register("password")} className="input dark:bg-dark-inputs-bg dark:text-dark-inputs-texts  dark:focus:border-dark-inputs-focus" placeholder="Password" name="password" />
             
 
-            { isLoading ? <button disabled="disabled" className="btn btn-neutral mt-4 cursor-not-allowed"><span className="loading loading-spinner loading-sm"></span> Loading...</button> : <button className="btn btn-neutral dark:btn-primary mt-4">Login</button> }
+            {   <button disabled={isLoading} className="btn btn-neutral dark:btn-primary mt-4 border-black dark:hover:bg-gray-600 hover:bg-gray-800 dark:border-dark-borders-color  text-white">{isLoading ? "Loading..." : "Login"}</button> }
+
 
             <div className='w-full text-end text-red-500 h-5'>{err && err}</div>
 
-            <div className='flex gap-1 items-center mt-2'>
+         { paths === "/admin/login" ? null :  <div className='flex gap-1 items-center mt-2'>
             <p className='dark:text-dark-paragraph  text-black'>Dont have an account? </p>
            <Link to={"/signup"}> <span className='text-xs dark:text-blue-400 text-blue-500 cursor-pointer'>Signup</span> </Link>
-            </div>
+            </div>}
 
-           {route === "/admin/login" ? null : <div className="divider dark:text-dark-smalls-text">or</div>}
+           {paths === "/admin/login" ? null : <div className="divider dark:text-dark-smalls-text">or</div>}
 
-          {route === "/admin/login" ? null : <OAuth />}
+          {paths === "/admin/login" ? null : <OAuth />}
         </form>
     </>
   )

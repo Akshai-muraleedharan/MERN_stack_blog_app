@@ -113,7 +113,7 @@ import { axiosInstance } from "./api"
     } 
   }
 
-  export const authMostViewBlog = async (blogId) => {
+  export const authMostViewBlog = async () => {
     try {
       const response = await axiosInstance.get(`/blog/mostview`)
       return response?.data

@@ -148,3 +148,61 @@ import { axiosInstance } from "./api";
             throw error
         } 
       }
+
+
+       export const authAdminMostViewBlog = async () => {
+          try {
+            const response = await axiosInstance.get(`/admin/blogs/views`)
+            return response?.data
+          } catch (error) {
+              console.error("blog error:", error.response?.data || error.message);
+              throw error
+          } 
+        }
+
+
+        export const authAdminLogOut = async () => {
+            try {
+              const response = await axiosInstance.post(`/admin/log-out`)
+              return response?.data
+            } catch (error) {
+                console.error("blog error:", error.response?.data || error.message);
+                throw error
+            } 
+          }
+
+
+          
+    export const authAdminUserCreate = async (data) => {
+
+        try {
+            const response = await axiosInstance.post('/admin/user/create',{
+                username:data.username,
+                email:data.email,
+                password:data.password
+            })
+            return response?.data
+        } catch (error) {
+            console.error("Registration error:", error.response?.data || error.message);
+            throw error
+        }
+
+    }
+
+
+      export const authAdminCreateBlog = async (formData) => {
+        try {
+            console.log([...formData])
+          const response = await axiosInstance.post(`/admin/blog/create`,formData,{
+    
+            Headers:{
+              "Content-Type": "multipart/form-data",
+            }
+          },)
+          return response?.data
+        } catch (error) {
+            console.error("blog error:", error.response?.data || error.message);
+            throw error
+            
+        } 
+      }

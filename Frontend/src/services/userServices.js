@@ -53,9 +53,6 @@ import { axiosInstance } from "./api"
 
 
     //  auth route function are below
-
-
-    
     export const  authUserProfile = async (data) => {
         try {
             const response = await axiosInstance.get('/user/profile')
@@ -67,7 +64,24 @@ import { axiosInstance } from "./api"
 
     }
 
-    export const  authUserLogOut = async (data) => {
+
+    
+    export const  authUserProfileUpdate = async (data) => {
+        try {
+            const response = await axiosInstance.put('/user/profile/update',{
+                username:data.username,
+                email:data.email,
+                password:data.password
+            })
+            return response?.data
+        } catch (error) {
+            console.error("Registration error:", error.response?.data || error.message);
+            throw error
+        }
+
+    }
+
+    export const  authUserLogOut = async () => {
         try {
             const response = await axiosInstance.post('/user/logout')
             return response?.data

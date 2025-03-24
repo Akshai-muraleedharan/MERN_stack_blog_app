@@ -7,7 +7,7 @@ const BlogListTable = ({loadingDelete,blogsData,setFindOneBlog,setOpenCommentTab
   const [oneBlog,setOneBlog] = useState({})
 
    
-// console.log(oneBlog)
+
 
     const dateConvert = (item) => {
         const date = new Date(item)    

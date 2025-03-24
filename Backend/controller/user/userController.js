@@ -2,6 +2,7 @@ import { userLoginJoiValid, userValidationSchema } from "../../utils/userJoiVali
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import UserModel from "../../model/userModel.js";
+import { userProfileJoinValid } from "../../utils/userProfileUpdate.js";
 
 
 
@@ -112,6 +113,49 @@ import UserModel from "../../model/userModel.js";
         return res.status(error.status || 400).json(error.message || "internal server error")
       }
   }
+
+
+  export const userProfileUpdate = async (req,res) => {
+
+    const {error,value} = userProfileJoinValid.validate(req.body)
+
+    if(error){
+      return res.status(400).json({success:false,message:error.details[0].message})
+  }
+      try {
+        const {username,email,password} = value;
+
+        const {userId} = req.userId
+       if(username === '' || email === ''){
+        return res.status(400).json({success:false,message:"email or username is empty"})
+       }
+
+      
+
+        const userNameLower = username.toLowerCase()
+
+          await UserModel.findByIdAndUpdate(userId,{
+              username:userNameLower,
+              email
+          },{new:true})
+
+          if(password.length >= 8){
+            const salt = await bcryptjs.genSalt(10);
+            const hasedPassword = await bcryptjs.hash(password, salt)
+             await UserModel.findByIdAndUpdate(userId,{
+             password:hasedPassword
+          },{new:true})
+          }
+    
+
+        res.status(200).json({success:true,message:"profile updated",})
+        
+      } catch (error) {
+        
+        return res.status(error.status || 400).json(error.message || "internal server error")
+      }
+  }
+
 
 
     export const userProfile = async (req,res) => {

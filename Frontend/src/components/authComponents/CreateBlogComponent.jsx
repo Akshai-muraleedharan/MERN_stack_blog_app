@@ -19,7 +19,8 @@ const CreateBlogComponent = ({blogCreate,fetchSinglePage,view,setView,fetchData,
             () => ({
                 readonly: false, // all options from https://xdsoft.net/jodit/docs/,
                 placeholder: 'Start typings...',
-                theme:theme
+                theme:theme,
+                
                 
             }),
             [theme]

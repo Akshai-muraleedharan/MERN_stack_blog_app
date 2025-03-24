@@ -40,14 +40,15 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
           
 
           const categToLowerCase = category.toLowerCase();
-
+          const lowerCaseTitle = title.toLowerCase()
             const blog =  new blogModel({
                 title,
                 content:sanitizeHtml,
                 author:userId,
                 image:uploadResult.secure_url,
                 imageId:uploadResult.public_id,
-                category:categToLowerCase
+                category:categToLowerCase,
+                searchTitle:lowerCaseTitle
             })
 
            const savedBlog =   await blog.save()
@@ -240,6 +241,27 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
       }
     } 
 
+    
+
+    export const authSearchBlog = async (req,res) => {
+      try {
+         const title = req.query.title
+         const page = parseInt(req.query.page) || 1
+         const limit = parseInt(req.query.limit) || 6
+         const skip = (page - 1) * limit
+         
+         const titleLowerCase = title.toLowerCase().split(/\+s/)
+             
+         const findBlog = await blogModel.find({$text:{ $search:titleLowerCase.join(' ')}}).sort({createdAt:-1}).skip(skip).limit(limit)
+
+         res.status(200).json({success:true,message:"data fetched",data:findBlog,page,limit,hasMore: findBlog.length === limit})
+      } catch (error) {
+       return res.status(error.status || 400).json(error.message || "internal server error" )
+      }
+   }
+
+
+    
 
 
     //  normal users
@@ -307,3 +329,21 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
         return res.status(error.status || 400).json(error.message || "internal server error" )
       }
     } 
+
+
+    export const SearchBlog = async (req,res) => {
+      try {
+         const title = req.query.title
+         const page = parseInt(req.query.page) || 1
+         const limit = parseInt(req.query.limit) || 6
+         const skip = (page - 1) * limit
+         
+         const titleLowerCase = title.toLowerCase().split(/\+s/)
+             
+         const findBlog = await blogModel.find({$text:{ $search:titleLowerCase.join(' ')}}).sort({createdAt:-1}).skip(skip).limit(limit)
+
+         res.status(200).json({success:true,message:"data fetched",data:findBlog,page,limit,hasMore: findBlog.length === limit})
+      } catch (error) {
+       return res.status(error.status || 400).json(error.message || "internal server error" )
+      }
+   }

@@ -47,6 +47,17 @@ import { axiosInstance } from "./api"
     } 
   }
 
+  export const searchBlog = async (query) => {
+    try {
+
+      const response = await axiosInstance.get(`/blog/search?title=${query}`)
+      return response?.data
+    } catch (error) {
+        console.error("blog error:", error.response?.data || error.message);
+        throw error
+        
+    } 
+  }
 
 
 
@@ -200,6 +211,20 @@ import { axiosInstance } from "./api"
     try {
 
       const response = await axiosInstance.delete(`/blog/delete/${id}`)
+      return response?.data
+    } catch (error) {
+        console.error("blog error:", error.response?.data || error.message);
+        throw error
+        
+    } 
+  }
+
+
+  
+  export const authSearchBlog = async (query) => {
+    try {
+
+      const response = await axiosInstance.get(`/blog/auth/search/blog?title=${query}`)
       return response?.data
     } catch (error) {
         console.error("blog error:", error.response?.data || error.message);

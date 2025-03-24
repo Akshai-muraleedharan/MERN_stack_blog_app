@@ -9,7 +9,6 @@ import Cookies from 'js-cookie';
 const Home = () => {
 
   const [dataFetch,setFetchData] = useState([])
-  
   const [hasMore,setHasMore] = useState(true)
   const [page,setPage] = useState(1)
   const [mostView,setMostView] = useState([])

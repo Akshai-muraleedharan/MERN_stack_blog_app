@@ -11,10 +11,12 @@ const SignupPage = () => {
   const setUser = useAuthStore((state) => state.setUser)
   const {isLoading,setLoading} = useAuthStore()
   const [err,seterr] = useState(null)
-
+  
 
   
   const navigate = useNavigate();
+
+ 
 
   err ? setTimeout(() => { seterr(null) } , 5000) : null
  
@@ -37,8 +39,7 @@ const SignupPage = () => {
 
   return (
     <>
-
-          <h2 className='text-center mt-5 font-bold text-3xl dark:text-dark-heads text-black'> Signup</h2>
+        <h2 className='text-center mt-5 font-bold text-3xl dark:text-dark-heads text-black'> Signup</h2>
        <SignUpComponent isLoading={isLoading} ToastContainer={ToastContainer} authUserCreate={authUserCreate} err={err}/>
     </>
   )

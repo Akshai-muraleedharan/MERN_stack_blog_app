@@ -1,6 +1,12 @@
 import React from 'react'
 import { FaSearch } from "react-icons/fa";
+import {Link} from 'react-router-dom'
+import useAuthStore from '../../store/authStore';
+
 const Hero = () => {
+ 
+  const {user} = useAuthStore()
+
   return (
             <div className="hero dark:bg-dark-bg bg-base-200 min-h-screen">
         <div className="hero-content text-center">
@@ -10,7 +16,7 @@ const Hero = () => {
             Explore expert tips, trends, and tutorials to sharpen your coding skills.
             Start building innovative, responsive web experiences today.
             </p>
-            <button className="btn btn-neutral item-center  dark:text-white justify-center"><FaSearch /> Search</button>
+          <Link to={user ? '/blog/search' : '/search'}> <button className="btn btn-neutral item-center  dark:text-white justify-center"><FaSearch /> Search</button></Link> 
             </div>
         </div>
         </div>

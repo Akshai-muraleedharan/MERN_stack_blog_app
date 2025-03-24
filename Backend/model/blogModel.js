@@ -19,6 +19,10 @@ import mongoose from 'mongoose'
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
      },
+     searchTitle:{
+      type:String,
+      required:true
+     },
      createdAt:{
         type:Date,
         default:Date.now
@@ -51,7 +55,9 @@ import mongoose from 'mongoose'
       required:true
      }
   })
-
+  
+  blogSchema.index({title:'text'})
   const blogModel = mongoose.model("Blog",blogSchema);
+  
 
   export default blogModel

@@ -3,6 +3,9 @@ import { createBrowserRouter } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
 import Loader from '../components/commonComponents/Loader'
 import ProtectedRouteAdmin from './ProtectedRouteAdmin'
+import ErrorPage from '../components/commonComponents/ErrorPage'
+
+
 
 
 
@@ -11,6 +14,7 @@ const Home = lazy(() => import('../pages/rootpage/Home'))
 const LoginPage = lazy(() => import('../pages/rootpage/LoginPage')) 
 const SignupPage = lazy(() => import('../pages/rootpage/SignupPage')) 
 const SingleListPage = lazy(() => import('../pages/rootpage/SingleListPage')) 
+const SearchPage = lazy(() => import('../pages/rootpage/SearchPage')) 
 
 const AuthLayout = lazy(() => import('../layout/AuthLayout'))
 const AuthHomePage = lazy(() => import('../pages/authpage/AuthHomePage')) 
@@ -18,6 +22,7 @@ const AuthSingleListPage = lazy(() => import('../pages/authpage/AuthSingleListPa
 const AuthCreateBlogPage = lazy(() => import('../pages/authpage/AuthCreateBlogPage')) 
 const AuthListPageContent = lazy(() => import('../pages/authpage/AuthListPageContent')) 
 const AuthProfilePage = lazy(() => import('../pages/authpage/AuthProfilePage')) 
+const AuthSearchPage = lazy(() => import('../pages/authpage/AuthSearchPage')) 
 
 const AdminLayout = lazy(() => import('../layout/AdminLayout')) 
 const AdminHomePage = lazy(() => import('../pages/authAdminPage/AdminHomePage')) 
@@ -30,7 +35,12 @@ const AdminBlogCreate = lazy(() => import('../pages/authAdminPage/AdminBlogCreat
 
 export const router = createBrowserRouter([
   
+  {
+    path:"*",
+    element:<ErrorPage />
+  },
     {
+
       path:"/",
       element:(
         <Suspense fallback={<Loader/>}>
@@ -58,6 +68,10 @@ export const router = createBrowserRouter([
         {
           path:"/admin/login",
           element:<AdminLogin />
+        },
+        {
+          path:'/search',
+          element:<SearchPage />
         }
         
       ]
@@ -94,6 +108,10 @@ export const router = createBrowserRouter([
       {
         path:"/blog/user-profile/blog-data/:id",
         element:<AuthListPageContent />
+      },
+      {
+        path:"search",
+        element:<AuthSearchPage />
       }
     ]
 

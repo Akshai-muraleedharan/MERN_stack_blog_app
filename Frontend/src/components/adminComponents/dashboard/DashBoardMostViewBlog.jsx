@@ -4,9 +4,9 @@ const DashBoardMostViewBlog = ({mostView}) => {
   return (
     <div className='shadow rounded mt-5'> 
    
-   <div className="overflow-x-auto">
+   {mostView.length === 0 ? <p className='text-black dark:text-dark-smalls-text'>No Data Found</p> : <div className="overflow-x-auto">
   <table className="table dark:bg-dark-cards-bg">
-    {/* head */}
+    
     <thead>
       <tr className='dark:text-dark-smalls-text text-black'>
         <th></th>
@@ -26,7 +26,7 @@ const DashBoardMostViewBlog = ({mostView}) => {
      ))}
     </tbody>
   </table>
-</div>
+</div>}
     </div>
   )
 }

@@ -12,12 +12,12 @@ const AuthProfilePage = () => {
   const [postedBlog,setPostedBlog] = useState([])
 
   const SetUserNoToken = useAuthStore((state) => state.SetUserNoToken)
-     
+
+   
      const fetchProfile = async () => {
       try {
         setLoading(true)
           const res = await authUserProfile()
-
           setUserDetails(res?.userData)
           setPostedBlog(res?.userData.postedBlogs)
           setLoading(false)
@@ -33,6 +33,7 @@ const AuthProfilePage = () => {
       userDetails.isOAuth ? setButtonOpen(false) : setButtonOpen(true)
      } 
 
+     
 
 
      useEffect(() => {
@@ -50,9 +51,9 @@ const AuthProfilePage = () => {
   
               
                
-                <h1 className='text-center mt-10 mb-5 font-semibold text-2xl dark:text-dark-heads'>Posted Blogs</h1>
+                <h1 className='text-center mt-10 mb-5 font-semibold text-2xl dark:text-dark-heads'>Your Blogs</h1>
   
-                {loading ? <p className='flex justify-center mt-4'><span className="loading dark:bg-dark-spinners-color loading-spinner loading-md"></span></p> : <AuthUserBlogsList  postedBlog={postedBlog}  /> }
+                { loading ? <p className='flex justify-center mt-4'><span className="loading dark:bg-dark-spinners-color loading-spinner loading-md"></span></p> : postedBlog.length === 0 ? <p className='text-center font-bold'>no data found</p> : <AuthUserBlogsList  postedBlog={postedBlog}  /> }
                
                </div>
        </div>

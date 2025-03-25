@@ -8,7 +8,7 @@
     import rateLimiter from "express-rate-limit"
     import compression from 'compression'
     const app = express()
- 
+  
 
     const corsOption = {
         origin:  process.env.FRONTENDURL,

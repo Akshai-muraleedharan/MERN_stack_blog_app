@@ -11,7 +11,7 @@
  
 
     const corsOption = {
-        origin:  process.env.FRONTENDURL ||"http://localhost:5173",
+        origin:  process.env.FRONTENDURL,
         //  origin:  "http://localhost:5173",
         credentials:true
     } 

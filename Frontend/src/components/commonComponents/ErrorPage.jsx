@@ -1,11 +1,10 @@
   import React from "react";
-  import { useNavigate } from "react-router-dom";
+  import { Link} from "react-router-dom";
+import useAuthStore from "../../store/authStore";
 
   const ErrorPage = () => {
-  const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  };
+  
+    const {user} = useAuthStore()
 
   return (
     <section className="bg-white dark:bg-gray-900 min-h-screen flex items-center">
@@ -21,12 +20,10 @@
             Sorry, we can't find that page. You'll find lots to explore on the
             home page.{" "}
           </p>
-          <button
-            onClick={goBack}
-            className="inline-flex text-white btn-primary btn hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900 my-4"
-          >
+         <Link to={user ? '/blog' : '/'}><button  className="inline-flex text-white btn-primary btn hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900 my-4">
             Back to Homepage
           </button>
+          </Link> 
         </div>
       </div>
     </section>

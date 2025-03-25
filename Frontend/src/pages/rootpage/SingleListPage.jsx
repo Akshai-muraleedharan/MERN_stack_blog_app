@@ -1,31 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import { pageView, singleBlogPage } from '../../services/blogServices'
-import { useParams } from 'react-router-dom'
-import SingleListCard from '../../components/rootComponents/SingleListCard';
-import DOMpurify from'dompurify'
-const SingleListPage = () => {
+  import React, { useEffect, useState } from 'react'
+  import { pageView, singleBlogPage } from '../../services/blogServices'
+  import { useParams } from 'react-router-dom'
+  import SingleListCard from '../../components/rootComponents/SingleListCard';
+  import DOMpurify from'dompurify'
 
+  const SingleListPage = () => {
   const [fetchData,setFetchData] = useState({})
   const [loading,setLoading] = useState(true)
   const [loadMore,setLoadMore] = useState(true)
   const [checkComment,setCheckComment] = useState([])
   const [sanitizedContent,setSanitizedContent] = useState("")
   
-  
   const dateConvert = (item) => {
-    const date = new Date(item)
-
-    const formattedDate = date.toLocaleString('en-US', {
+  const date = new Date(item)
+  const formattedDate = date.toLocaleString('en-US', {
       month: 'long',
       day: 'numeric',
     });
-        return formattedDate
+  return formattedDate
   }
 
   let blogId = useParams()
   
   const fetchSingleBlog = async () => {
-
     try {
       setLoading(true)
       const res = await singleBlogPage(blogId.id)
@@ -56,11 +53,10 @@ const SingleListPage = () => {
      setTimeout(()=>{ setLoadMore(false)},3000)
 
   return (
-    <div className="px-5 md:px-10 lg:px-26 ">
-
-     { loading ? <p className='flex justify-center mt-4'><span className="loading loading-spinner dark:bg-dark-spinners-color loading-md"></span></p> : <SingleListCard sanitizedContent={sanitizedContent} checkComment={checkComment} fetchData={fetchData}  loadMore={loadMore} dateConvert={dateConvert}/>}
+    <div className='px-5 md:px-10 lg:px-26'>
+       { loading ? <p className='flex justify-center mt-4'><span className='loading loading-spinner dark:bg-dark-spinners-color loading-md'></span></p> : <SingleListCard sanitizedContent={sanitizedContent} checkComment={checkComment} fetchData={fetchData}  loadMore={loadMore} dateConvert={dateConvert}/>}
     </div>
-  )
-}
+    )
+  }
 
-export default SingleListPage
+  export default SingleListPage

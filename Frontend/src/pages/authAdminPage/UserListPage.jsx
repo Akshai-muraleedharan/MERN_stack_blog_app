@@ -13,8 +13,7 @@ const UserListPage = () => {
  const [loading,setLoading] = useState(true)
  const [UserDeleteLoading,setUserDeleteLoading] = useState(false)
  
- 
-
+  
  const limit = 8
 
    const SetAdminNoToken = useAdminAuthStore((state) => state.SetAdminNoToken)
@@ -77,9 +76,9 @@ const UserListPage = () => {
        <UserListTable UserDeleteLoading={UserDeleteLoading} ToastContainer={ToastContainer} deleteUser={deleteUser} userData={userData} fetchUserList={fetchUserList} setLoading={setLoading} />
 
            <div className=" mt-5 text-xs flex gap-5 justify-end">
-        <button onClick={currentPage === 1 ? null : previousPage}  className={currentPage === 1 ? ' text-gray-500 text-xs md:text-[16px]' : 'dark:text-white hover:text-blue-500 text-xs md:text-[16px] cursor-pointer'}>Previous </button>
-        <button onClick={totalData === totalUsers ? null : nextPage} className={ totalData === totalUsers ?  ' text-gray-500 text-xs md:text-[16px]' : 'dark:text-white hover:text-blue-500 text-xs md:text-[16px] cursor-pointer'}>Next</button>
-        </div>
+            <button onClick={currentPage === 1 ? null : previousPage}  className={currentPage === 1 ? ' text-gray-500 text-xs md:text-[16px]' : 'dark:text-white hover:text-blue-500 text-xs md:text-[16px] cursor-pointer'}>Previous </button>
+            <button onClick={totalData === totalUsers ? null : nextPage} className={ totalData === totalUsers ?  ' text-gray-500 text-xs md:text-[16px]' : 'dark:text-white hover:text-blue-500 text-xs md:text-[16px] cursor-pointer'}>Next</button>
+           </div>
         </div> }
     </div>
   )

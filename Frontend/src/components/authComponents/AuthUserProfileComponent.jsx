@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
-import useAuthStore from '../../store/authStore'
-import { authUserLogOut, authUserProfileUpdate } from '../../services/userServices'
-import { useNavigate } from 'react-router-dom'
-import {useForm} from 'react-hook-form'
-import {toast,ToastContainer} from 'react-toastify'
+    import React, { useState } from 'react'
+    import useAuthStore from '../../store/authStore'
+    import { authUserLogOut, authUserProfileUpdate } from '../../services/userServices'
+    import { useNavigate } from 'react-router-dom'
+    import {useForm} from 'react-hook-form'
+    import {toast,ToastContainer} from 'react-toastify'
 
-const AuthUserProfileComponent = ({ClickedInput,userDetails,ButtonOpen}) => {
-    
+    const AuthUserProfileComponent = ({ClickedInput,userDetails,ButtonOpen}) => {
     const [passwordOpen,setPasswordOpen] = useState(true)
     const [confirmPasswordOpen,setConfirmPasswordOpen] = useState(true)
     const [profileUpdateLoading,setProfileUpdateLoading] = useState(false)
@@ -15,7 +14,6 @@ const AuthUserProfileComponent = ({ClickedInput,userDetails,ButtonOpen}) => {
     const navigate = useNavigate()
     const {register,handleSubmit} = useForm()
     const specialCharRegex = /[^A-Za-z0-9]/;
-
     
     const onSubmit = async (data) => {
         let err;
@@ -31,11 +29,9 @@ const AuthUserProfileComponent = ({ClickedInput,userDetails,ButtonOpen}) => {
                     toast.error("Password should only contain letters  and digits (no special characters)")
                     err = "yes"
                 }
-
             }
            if(data.password.length > 0){
-            validatePassword(data)
-           
+            validatePassword(data) 
             }
                  if(err === "yes"){
                         null
@@ -47,9 +43,7 @@ const AuthUserProfileComponent = ({ClickedInput,userDetails,ButtonOpen}) => {
                     }
                     setProfileUpdateLoading(false)
                  } 
-           
-            
-            
+              
         } catch (error) {
             toast.error(error?.response?.data?.message)
             console.log(error)
@@ -84,33 +78,31 @@ const AuthUserProfileComponent = ({ClickedInput,userDetails,ButtonOpen}) => {
         }
     }
   return (
-    <div>
-        
+    <div>     
         <form onSubmit={handleSubmit(onSubmit)} className=" mx-auto mt-10 fieldset w-xs dark:bg-dark-cards-bg dark:border-0 bg-base-200 border border-base-300 p-4 rounded-box">
                                 
+        <label className="fieldset-label dark:text-dark-smalls-text text-black">Username</label>
+          <input type="text" {...register("username")} className="input dark:bg-gray-300 " name="username" onClick={ClickedInput} defaultValue={userDetails.username} placeholder="My awesome page" />
                                 
-                                <label className="fieldset-label dark:text-dark-smalls-text text-black">Username</label>
-                                <input type="text" {...register("username")} className="input dark:bg-gray-300 " name="username" onClick={ClickedInput} defaultValue={userDetails.username} placeholder="My awesome page" />
+          <label className="fieldset-label dark:text-dark-smalls-text text-black">Email</label>
+           <input type="text" {...register('email')} className="input dark:bg-gray-300 " name="email" onClick={ClickedInput} defaultValue={userDetails.email} placeholder="my-awesome-page" />
                                 
-                                <label className="fieldset-label dark:text-dark-smalls-text text-black">Email</label>
-                                <input type="text" {...register('email')} className="input dark:bg-gray-300 " name="email" onClick={ClickedInput} defaultValue={userDetails.email} placeholder="my-awesome-page" />
+            {  ButtonOpen &&<div className='relative'>
+            <label className="fieldset-label dark:text-dark-smalls-text text-black">New Password</label>
+             <input type={passwordOpen ? "password" : "text" } {...register('password')} className="input dark:bg-gray-300" name="password"  placeholder="password" />
+             <span className='absolute top-7 right-2 cursor-pointer ' onClick={changePasswordText}>{passwordOpen ? "show" : "Hide"}</span>
+           </div> }
                                 
-                            {  ButtonOpen &&<div className='relative'>
-                                <label className="fieldset-label dark:text-dark-smalls-text text-black">New Password</label>
-                                <input type={passwordOpen ? "password" : "text" } {...register('password')} className="input dark:bg-gray-300" name="password"  placeholder="password" />
-                                <span className='absolute top-7 right-2 cursor-pointer ' onClick={changePasswordText}>{passwordOpen ? "show" : "Hide"}</span>
-                            </div> }
-                                
-                            { ButtonOpen && <div className='relative'> 
-                            <label className="fieldset-label dark:text-dark-smalls-text text-black">Confirm Password</label>
-                                <input type={confirmPasswordOpen ? "password" : "text" } {...register('confirmPassword')} className="input dark:bg-gray-300" name="confirmPassword"  placeholder="password" /> 
-                                <span className='absolute top-7 right-2 cursor-pointer' onClick={changeConfirmPasswordText}>{confirmPasswordOpen ? "show" : "Hide"}</span>
-                                </div>}
+                 { ButtonOpen && <div className='relative'> 
+                 <label className="fieldset-label dark:text-dark-smalls-text text-black">Confirm Password</label>
+                  <input type={confirmPasswordOpen ? "password" : "text" } {...register('confirmPassword')} className="input dark:bg-gray-300" name="confirmPassword"  placeholder="password" /> 
+                    <span className='absolute top-7 right-2 cursor-pointer' onClick={changeConfirmPasswordText}>{confirmPasswordOpen ? "show" : "Hide"}</span>
+                   </div>}
                 
-                            { ButtonOpen && <button  disabled={profileUpdateLoading} className="btn btn-neutral dark:btn-primary mt-4 border-black dark:hover:bg-gray-600 hover:bg-gray-800 dark:border-dark-borders-color  text-white">{profileUpdateLoading ? "Loading..." : "Update"}</button>}
-                            <button type='button' disabled={logOutLoading} onClick={logOut} className=' cursor-pointer btn btn-error font-semibold mt-4 hover:bg-red-400  text-white dark:border-dark-borders-color'>{logOutLoading ? "Loading..." : "LogOut"}</button>
-                            </form>
-                            <ToastContainer/>
+           { ButtonOpen && <button  disabled={profileUpdateLoading} className="btn btn-neutral dark:btn-primary mt-4 border-black dark:hover:bg-gray-600 hover:bg-gray-800 dark:border-dark-borders-color  text-white">{profileUpdateLoading ? "Loading..." : "Update"}</button>}
+            <button type='button' disabled={logOutLoading} onClick={logOut} className=' cursor-pointer btn btn-error font-semibold mt-4 hover:bg-red-400  text-white dark:border-dark-borders-color'>{logOutLoading ? "Loading..." : "LogOut"}</button>
+         </form>
+        <ToastContainer/>
     </div>
   )
 }

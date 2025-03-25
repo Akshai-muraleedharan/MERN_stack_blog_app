@@ -1,6 +1,4 @@
-import { axiosInstance } from "./api"
-
-
+  import { axiosInstance } from "./api"
 
   export const fetchBlogData = async (page,limit) => {
     try {
@@ -25,7 +23,6 @@ import { axiosInstance } from "./api"
     } 
   }
 
-
   export const pageView = async (blogId) => {
     try {
       const response = await axiosInstance.put(`/blog/view/${blogId}`)
@@ -35,7 +32,6 @@ import { axiosInstance } from "./api"
         throw error
     } 
   }
-
 
   export const mostViewBlog = async (blogId) => {
     try {
@@ -59,10 +55,7 @@ import { axiosInstance } from "./api"
     } 
   }
 
-
-
   // auth function below
-
 
   export const authFetchBlogData = async (page,limit) => {
     try {
@@ -74,7 +67,6 @@ import { axiosInstance } from "./api"
         throw error
     }
   }
-
 
   export const authSingleBlogPage = async (blogId) => {
     try {
@@ -88,7 +80,6 @@ import { axiosInstance } from "./api"
     } 
   }
 
-
   export const authPageView = async (blogId) => {
     try {
       const response = await axiosInstance.put(`/blog/auth/view/${blogId}`)
@@ -99,8 +90,6 @@ import { axiosInstance } from "./api"
     } 
   }
 
-
-  
   export const authLike = async (blogId) => {
     try {
  
@@ -111,7 +100,6 @@ import { axiosInstance } from "./api"
         throw error
     } 
   }
-
 
   export const authUnLike = async (blogId) => {
     try {
@@ -134,7 +122,6 @@ import { axiosInstance } from "./api"
     } 
   }
 
-
   export const authCommentBlog = async (blogId,data) => {
     try {
       const response = await axiosInstance.post(`/blog/comment/${blogId}`,{
@@ -146,7 +133,6 @@ import { axiosInstance } from "./api"
         throw error
     } 
   }
-
 
   export const authCommentUpdate = async (commentId,data) => {
     try {
@@ -160,8 +146,6 @@ import { axiosInstance } from "./api"
     } 
   }
 
-
-  
   export const authCommentDelete = async (commentId) => {
     try {
       const response = await axiosInstance.delete(`/blog/auth/delete/${commentId}`)
@@ -219,8 +203,6 @@ import { axiosInstance } from "./api"
     } 
   }
 
-
-  
   export const authSearchBlog = async (query) => {
     try {
 

@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { authCommentBlog, authCommentDelete, authCommentUpdate, authLike, authPageView, authSingleBlogPage, authUnLike } from '../../services/blogServices'
-import { useParams } from 'react-router-dom'
-import SingleListCard from '../../components/rootComponents/SingleListCard'
-import useAuthStore from '../../store/authStore'
-import DOMpurify from'dompurify'
+  import React, { useEffect, useState } from 'react'
+  import { authCommentBlog, authCommentDelete, authCommentUpdate, authLike, authPageView, authSingleBlogPage, authUnLike } from '../../services/blogServices'
+  import { useParams } from 'react-router-dom'
+  import SingleListCard from '../../components/rootComponents/SingleListCard'
+  import useAuthStore from '../../store/authStore'
+  import DOMpurify from'dompurify'
 
-const AuthSingleListPage = () => {
-  
+  const AuthSingleListPage = () => { 
   const [fetchData,setFetchData] = useState({})
   const [loading,setLoading] = useState(true)
   const [buttonLoading,setButtonLoading] = useState(false)
@@ -20,37 +19,33 @@ const AuthSingleListPage = () => {
   const [userClick,setUserClick] = useState(false)
   const [commentBox,setCommentBox] = useState(false)
   const [commentForUpdate,setCommentForUpdate] = useState(null)
-   const [sanitizedContent,setSanitizedContent] = useState("")
+  const [sanitizedContent,setSanitizedContent] = useState("")
 
   let blogId = useParams()
   const {user} = useAuthStore()
   
   const SetUserNoToken = useAuthStore((state) => state.SetUserNoToken)
   const dateConvert = (item) => {
-    const date = new Date(item)
-
-    const formattedDate = date.toLocaleString('en-US', {
+  const date = new Date(item)
+  const formattedDate = date.toLocaleString('en-US', {
       month: 'long',
       day: 'numeric',
     });
-        return formattedDate
+  return formattedDate
     }
 
   
   
   //  fetch single page data
   const fetchSingleBlog = async () => {
-
     try {
-        loading === null ? "" :  setLoading(true)
+      loading === null ? "" :  setLoading(true)
       const res = await authSingleBlogPage(blogId.id)
       setLikedBlog(res.getLike)
       setFetchData(res?.data)
       const sanitized = DOMpurify.sanitize(res?.data?.content)
       setSanitizedContent(sanitized)
-
       const sortData = res?.data?.comments?.sort((a,b) => (a.userId === user.userId ? -1 : 1))
-
       setCheckComment(sortData)
       setLoading(false)
       setLoading(null)
@@ -64,16 +59,14 @@ const AuthSingleListPage = () => {
     }
   }
 
-  
   // add like to blog
   const addLike = async () => {
-         try {
-          setLikeButtonLoading(true)
-            await authLike(blogId.id)        
-            setUserClick(true)
-            fetchSingleBlog()
-            setLikeButtonLoading(false)
-            
+      try {
+        setLikeButtonLoading(true)
+        await authLike(blogId.id)        
+        setUserClick(true)
+        fetchSingleBlog()
+        setLikeButtonLoading(false)            
          } catch (error) {
           console.log(error)
           setLikeButtonLoading(false)
@@ -81,16 +74,15 @@ const AuthSingleListPage = () => {
             SetUserNoToken(null)
           }
          }
-
       }
 
       const unLike = async () => {
         try {
           setUnLikeButtonLoading(true)
-           await authUnLike(blogId.id)        
-           setUserClick(false)
-           fetchSingleBlog()
-           setUnLikeButtonLoading(false)
+          await authUnLike(blogId.id)        
+          setUserClick(false)
+          fetchSingleBlog()
+          setUnLikeButtonLoading(false)
         } catch (error) {
          console.log(error)
          setUnLikeButtonLoading(false)
@@ -98,22 +90,19 @@ const AuthSingleListPage = () => {
            SetUserNoToken(null)
          }
         }
-
      }
-
 
      const addComment = () => {
       setCommentBox(true)
      }
 
      const postComment =  async (data) => {
-
        try {
         setButtonLoading(true)
         await authCommentBlog(blogId.id,data)
         fetchSingleBlog()
-          setCommentBox(false)
-          setButtonLoading(false)
+        setCommentBox(false)
+        setButtonLoading(false)
        } catch (error) {
         console.log(error)
         setButtonLoading(false)
@@ -127,7 +116,6 @@ const AuthSingleListPage = () => {
      const updateComment = async (id) => {
        const fetch = checkComment.find((item) => item._id === id)
        setCommentForUpdate(fetch)
-
      }
 
      const userUpdateComment = async (id,data) => {
@@ -149,10 +137,10 @@ const AuthSingleListPage = () => {
      const userDeleteComment = async (id) => {
          try{
           setcommentDeleteLoading(true)
-         await  authCommentDelete(id)
-             fetchSingleBlog()
-            setCommentBox(false)
-            setcommentDeleteLoading(false)
+          await authCommentDelete(id)
+          fetchSingleBlog()
+          setCommentBox(false)
+          setcommentDeleteLoading(false)
          }catch(error){
           console.log(error)
           setcommentDeleteLoading(false)
@@ -161,8 +149,6 @@ const AuthSingleListPage = () => {
           }
          }
      }
-
-
 
       // page view count function for most view logic 
    const pageViewCount = async () => {
@@ -179,17 +165,14 @@ const AuthSingleListPage = () => {
   useEffect(() => {
      fetchSingleBlog()
      pageViewCount()
-     
   },[])
 
      setTimeout(()=>{ setLoadMore(false)},2000)
   return (
     <div className="lg:px-32 md:px-10 px-5">
-
-  
    { loading === true ? <p className='flex justify-center mt-4'><span className="loading loading-md loading-spinner"></span></p>  : <SingleListCard commentEditLoading={commentEditLoading} commentDeleteLoading={commentDeleteLoading} unLikeButtonLoading={unLikeButtonLoading} LikeButtonLoading={LikeButtonLoading}  sanitizedContent={sanitizedContent} buttonLoading={buttonLoading} loading={loading} userDeleteComment={userDeleteComment} userUpdateComment={userUpdateComment} postComment={postComment} commentForUpdate={commentForUpdate} setCommentBox={setCommentBox} commentBox={commentBox} checkComment={checkComment} userClick={userClick} likedBlog={likedBlog} unLike={unLike} addLike={addLike} addComment={addComment}   fetchData={fetchData} fetchSingleBlog={fetchSingleBlog}  loadMore={loadMore} dateConvert={dateConvert} blogId={blogId} updateComment={updateComment} setCommentForUpdate={setCommentForUpdate} />}
-   </div>
-  )
-}
+    </div>
+    )
+  }
 
-export default AuthSingleListPage
+ export default AuthSingleListPage

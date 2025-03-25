@@ -86,9 +86,6 @@ import sanitizeContet from "../../middleware/domSanitize.js";
     }
 
  
-
-
-  
    export const adminDeleteBlog = async (req,res) => {
          try {
           const {blogId} = req.params

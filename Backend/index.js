@@ -5,7 +5,8 @@
     import cookieParser from "cookie-parser"
     import cors from "cors"
     import helmet from "helmet"
-
+    import rateLimiter from "express-rate-limit"
+    import compression from 'compression'
     const app = express()
  
 
@@ -15,10 +16,19 @@
         credentials:true
     } 
 
-    app.use(helmet())
-    app.use(express.json())
-    app.use(cookieParser())
-    app.use(cors(corsOption))
+    const limiter = rateLimiter({
+        windowMs: 15 * 60 * 1000,
+        limit:100,
+        message:"Too many request from this Ip Please again Later 15 minutes"
+    })
+
+    app.use(helmet());
+    app.use(express.json({limit:5000000}));
+    app.use(cookieParser());
+    app.use(cors(corsOption));
+    app.use(limiter);
+    app.use(compression())
+    
 
     const port = process.env.PORT || 4000
     

@@ -1,5 +1,5 @@
 import express from 'express'
-import {  AdminLogin, adminLogOut, configTest } from '../../../controller/admin/adminController.js'
+import {  AdminLogin, adminLogOut, } from '../../../controller/admin/adminController.js'
 import { checkadmin } from '../../../middleware/adminAuth.js'
 import { adminAuthSingleBlogData, adminblogApproval, adminblogNotApproval, adminCreateBlog, adminDeleteBlog, adminMostViewBlog, approvedBlogs, blogCount,  getBlogs,  userCount } from '../../../controller/admin/adminBlogController.js'
 import { adminDeleteUser, adminUserCreate, getUser } from '../../../controller/admin/adminUserController.js'
@@ -28,9 +28,6 @@ adminRoute.delete('/user/delete/:userId',checkadmin,adminDeleteUser)
 adminRoute.put('/blog-approval/:blogId',checkadmin,adminblogApproval)
 adminRoute.put('/blog/not-approval/:blogId',checkadmin,adminblogNotApproval)
 
-
-
-adminRoute.get('/test',checkadmin,configTest)
 
 // pagination
 adminRoute.get('/users/page',checkadmin,getUser)

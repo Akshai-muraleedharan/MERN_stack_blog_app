@@ -1,14 +1,14 @@
-import React from 'react'
+  import React from 'react'
+  import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
     <div className="mt-auto  border-t-1 dark:border-dark-footer-border border-gray-200">
     <footer className="footer footer-horizontal dark:bg-dark-bg  footer-center bg-base-200 text-base-content rounded p-10">
-  <nav className="grid grid-flow-col gap-4">
-    <a className="link link-hover dark:text-dark-smalls-text text-black">About us</a>
-    <a className="link link-hover dark:text-dark-smalls-text text-black">Contact</a>
-    
-    
+   <nav className="grid grid-flow-col gap-4">
+    <Link to={'/about'} className="link link-hover dark:text-dark-smalls-text text-black">About us</Link>
+    <Link to={'/contact'} className="link link-hover dark:text-dark-smalls-text text-black">Contact</Link>
+
   </nav>
   <nav>
     <div className="grid grid-flow-col gap-4">
@@ -43,15 +43,15 @@ const Footer = () => {
           className="fill-current dark:text-dark-smalls-text cursor-pointer hover:text-blue-500 dark:hover:text-blue-500 text-black">
           <path
             d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
-        </svg>
-      </a>
-    </div>
-  </nav>
-  <aside>
-    <p className='dark:text-dark-paragraph text-black'>Copyright © {new Date().getFullYear()} - All right reserved by Akshai Muraleedharan</p>
-  </aside>
-</footer>
-    </div>
+            </svg>
+          </a>
+        </div>
+      </nav>
+      <aside>
+      <p className='dark:text-dark-paragraph text-black'>Copyright © {new Date().getFullYear()} - All right reserved by Akshai Muraleedharan</p>
+    </aside>
+  </footer>
+  </div>
   )
 }
 

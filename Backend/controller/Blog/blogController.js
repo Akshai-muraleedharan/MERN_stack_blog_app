@@ -5,12 +5,8 @@ import blogModel from "../../model/blogModel.js";
 import UserModel from "../../model/userModel.js";
 import blogSchemaValidation from "../../utils/blogJoiValid.js";
 
-
-
      export const createBlog = async (req,res) => {
-
-      const {error,value} = blogSchemaValidation.validate(req.body)
-         
+      const {error,value} = blogSchemaValidation.validate(req.body)   
       if(error){
         return res.status(400).json({success:false,message:error.details[0].message})
       }
@@ -29,15 +25,10 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
             if(!file){
               return res.status(400).json({success:false,message:"image file not get"})
             }
-
-            
-
-              
+   
           const uploadResult = await  cloudineryInstance.uploader.upload(file.path,{ folder: "Mern Blog/Blog Images" }).catch((error)=>{
             return res.status(400).json({success:false,message:error})
           })
-
-          
 
           const categToLowerCase = category.toLowerCase();
           const lowerCaseTitle = title.toLowerCase()
@@ -88,9 +79,7 @@ import blogSchemaValidation from "../../utils/blogJoiValid.js";
             if(!userId){
               return res.status(400).json({success:false,message:"no user id"})
             }
-
-           
-              
+   
           const uploadResult = await  cloudineryInstance.uploader.upload(file.path,{ folder: "Mern Blog/Blog Images" }).catch((error)=>{
             return res.status(400).json({success:false,message:error})
           })

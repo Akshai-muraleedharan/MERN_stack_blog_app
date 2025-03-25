@@ -1,15 +1,11 @@
-import React from 'react'
+  import React from 'react'
 
-const DashBoardTop = ({BlogsTotal,userTotal,approvedBlog}) => {
-
-
+  const DashBoardTop = ({BlogsTotal,userTotal,approvedBlog}) => {
   const date = new Date()
-
   const getYear = date.getFullYear()
   const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
   const month = date.getMonth() + 1
   const monthWord = months[month - 1]
-
   const getUserPercentage =  userTotal / 100 
   const getApprovedBlogs =  approvedBlog / 100
   
@@ -17,25 +13,25 @@ const DashBoardTop = ({BlogsTotal,userTotal,approvedBlog}) => {
   return (
     <div className="stats shadow gap-5 dark:border dark:border-dark-borders-color dark:bg-dark-bg flex my-5 flex-col md:flex-row">
    
-    <div className="stat shadow">
-      <div className="stat-figure text-secondary">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          className="inline-block h-8 w-8 stroke-current">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
+     <div className="stat shadow">
+        <div className="stat-figure text-secondary">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            className="inline-block h-8 w-8 stroke-current">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
       </div>
-      <div className="stat-title dark:text-dark-heads">Total Blogs</div>
-      <div className="stat-value dark:text-dark-smalls-text">{BlogsTotal}</div>
-      <div className="stat-desc dark:text-dark-smalls-text">{`${monthWord} ${getYear}`}</div>
+        <div className="stat-title dark:text-dark-heads">Total Blogs</div>
+        <div className="stat-value dark:text-dark-smalls-text">{BlogsTotal}</div>
+        <div className="stat-desc dark:text-dark-smalls-text">{`${monthWord} ${getYear}`}</div>
     </div>
-  
+
     <div className="stat dark:bg-dark-bg">
       <div className="stat-figure text-secondary">
         <svg
@@ -52,9 +48,9 @@ const DashBoardTop = ({BlogsTotal,userTotal,approvedBlog}) => {
       </div>
       <div className="stat-title dark:text-dark-heads">New Users</div>
       <div className="stat-value dark:text-dark-smalls-text">{userTotal}</div>
-      <div className="stat-desc dark:text-dark-smalls-text">({`${getUserPercentage}%`})</div>
+      <div className="stat-desc dark:text-dark-smalls-text">({`${getUserPercentage}%`})</div> 
     </div>
-  
+    
     <div className="stat dark:bg-dark-bg">
       <div className="stat-figure text-secondary">
         <svg
@@ -69,12 +65,12 @@ const DashBoardTop = ({BlogsTotal,userTotal,approvedBlog}) => {
             d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
         </svg>
       </div>
-      <div className="stat-title dark:text-dark-heads">Approved blogs</div>
-      <div className="stat-value dark:text-dark-smalls-text">{approvedBlog}</div>
-      <div className="stat-desc dark:text-dark-smalls-text">({`${getApprovedBlogs}%`})</div>
+        <div className="stat-title dark:text-dark-heads">Approved blogs</div>
+        <div className="stat-value dark:text-dark-smalls-text">{approvedBlog}</div>
+        <div className="stat-desc dark:text-dark-smalls-text">({`${getApprovedBlogs}%`})</div>
+     </div>
     </div>
-  </div>
-  )
-}
+    )
+  }
 
 export default DashBoardTop

@@ -4,10 +4,6 @@ import jwt from "jsonwebtoken";
 import UserModel from "../../model/userModel.js";
 import { userProfileJoinValid } from "../../utils/userProfileUpdate.js";
 
-
-
-
-
   export const UserRegister = async (req,res) => {
 
       try {
@@ -185,17 +181,6 @@ import { userProfileJoinValid } from "../../utils/userProfileUpdate.js";
       }
 
 
-      export const configTest = async (req,res) => {
-        try {
-          const {email,password} = req.body
-
-      
-
-          res.status(200).json({success:true,message:"data upload successfully",email,password})
-        } catch (error) {
-          return res.status(error.status || 400).json(error.message || "internal server error")
-        }
-      }
 
 
       export const GoogleAuth = async (req,res) => {
@@ -258,7 +243,6 @@ import { userProfileJoinValid } from "../../utils/userProfileUpdate.js";
               res.status(201).json({success:true, message:"user created successfully",data:userlist})
           }
 
-          
           
          }catch(error){
           return res.status(error.status || 400).json(error.message || "internal server error")

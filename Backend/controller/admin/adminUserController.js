@@ -64,8 +64,6 @@ import bcryptjs from "bcryptjs";
        })
 
        const userData = await userSave.save()
-
- 
        const userlist = {
           username:userData.username,
           userId:userData._id

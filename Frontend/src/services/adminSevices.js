@@ -1,6 +1,4 @@
-import { axiosInstance } from "./api";
-
-
+ import { axiosInstance } from "./api";
 
  export const  adminLogin = async (data) => {
         try {
@@ -27,7 +25,6 @@ import { axiosInstance } from "./api";
         }
     }
 
-
     export const totaluser = async () => {
         try {
 
@@ -38,7 +35,6 @@ import { axiosInstance } from "./api";
             throw error
         }
     }
-
 
     export const approvedBlogs = async () => {
         try {
@@ -51,10 +47,6 @@ import { axiosInstance } from "./api";
         }
     }
 
-
-
-
-    
     export const userList = async (page,limit) => {
         try {
 
@@ -65,9 +57,7 @@ import { axiosInstance } from "./api";
             throw error
         }
     }
-
-        
-     
+ 
     export const blogDelete = async (id) => {
         try {
             const response = await axiosInstance.delete(`/admin/blogs/${id}`)
@@ -77,9 +67,6 @@ import { axiosInstance } from "./api";
             throw error
         }
     }
-
-
-
 
     export const blogList = async (page,limit) => {
         try {
@@ -92,7 +79,6 @@ import { axiosInstance } from "./api";
         }
     }
     
-
     export const authCommentDelete = async (commentId) => {
         try {
           const response = await axiosInstance.delete(`/admin/comment/${commentId}`)
@@ -103,7 +89,6 @@ import { axiosInstance } from "./api";
         } 
       }
     
-
       
     export const authSingleBlog = async (id) => {
         try {
@@ -114,7 +99,6 @@ import { axiosInstance } from "./api";
             throw error
         } 
       }
-
 
       export const authAdminApproval = async (id) => {
         try {
@@ -127,7 +111,6 @@ import { axiosInstance } from "./api";
       }
 
 
-      
       export const authAdminNotApproval = async (id) => {
         try {
           const response = await axiosInstance.put(`/admin/blog/not-approval/${id}`)
@@ -137,7 +120,6 @@ import { axiosInstance } from "./api";
             throw error
         } 
       }
-
 
       export const authAdminUserDelete = async (id) => {
         try {
@@ -192,7 +174,7 @@ import { axiosInstance } from "./api";
 
       export const authAdminCreateBlog = async (formData) => {
         try {
-            console.log([...formData])
+        
           const response = await axiosInstance.post(`/admin/blog/create`,formData,{
     
             Headers:{

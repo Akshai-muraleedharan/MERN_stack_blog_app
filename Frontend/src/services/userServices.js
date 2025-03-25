@@ -1,10 +1,6 @@
-import { axiosInstance } from "./api"
-
-
-
+    import { axiosInstance } from "./api"
 
     export const userRegister = async (data) => {
-
         try {
             const response = await axiosInstance.post('/user/register',{
                 username:data.username,
@@ -16,9 +12,7 @@ import { axiosInstance } from "./api"
             console.error("Registration error:", error.response?.data || error.message);
             throw error
         }
-
     }
-
 
     export const  userLogin = async (data) => {
         try {
@@ -35,8 +29,6 @@ import { axiosInstance } from "./api"
     }
 
     export const  googleUserAuth = async ({email,username}) => {
-
-        
         try {
             const response = await axiosInstance.post('/user/google',{
                 email:email,

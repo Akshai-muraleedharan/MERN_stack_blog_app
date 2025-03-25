@@ -14,7 +14,7 @@
         origin:  process.env.FRONTENDURL,
         //  origin:  "http://localhost:5173",
         credentials:true
-    } 
+    }  
 
     const limiter = rateLimiter({
         windowMs: 15 * 60 * 1000,

@@ -6,8 +6,8 @@
   return (
     <>
     <h1 className='text-md md:text-2xl dark:text-dark-heads text-black'>Latest Post</h1>
-          <div className='flex flex-col overflow-y-hidden md:flex-row md:justify-between lg:justify-evenly gap-5  mx-auto mt-5'> 
-          <div className={`w-full md:w-[60%] overflow-y-hidden flex flex-col ${dataFetch.length === 0 ? "justify-center": ""}`}>
+          <div className='flex flex-col  relative md:flex-row md:justify-between lg:justify-evenly gap-5  mx-auto mt-5'> 
+          <div className={`w-full md:w-[60%]  flex flex-col ${dataFetch.length === 0 ? "justify-center": ""}`}>
           { dataFetch.length === 0  ? <p className='flex justify-center'><span className="loading loading-spinner dark:bg-dark-spinners-color bg-black loading-sm"></span></p> : <SingleBlogCard data={dataFetch} hasMore={hasMore} fetchData={fetchData}/>}
           </div>
            <SideCard mostView={mostView}/>

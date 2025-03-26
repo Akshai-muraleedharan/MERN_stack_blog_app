@@ -42,7 +42,7 @@
 	}
   return (
 	<div className='px-5 md:px-10 lg:px-32 dark:bg-dark-bg w-full mb-5 bg-[#f9f9f9]'>
-	  {loading && <progress className="progress progress-primary sticky top-0 w-full" value={upload} max={100} ></progress>}
+	  {loading && <progress className="progress progress-primary  sticky top-0 w-full" value={upload} max={100} ></progress>}
        <CreateBlogComponent  loading={loading} blogCreate={blogCreate} ToastContainer={ToastContainer} /> 
 	</div> 
 	)

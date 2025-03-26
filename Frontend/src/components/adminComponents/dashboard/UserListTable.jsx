@@ -49,7 +49,7 @@
             <th></th>
             <th>Name</th>
             <th>Email</th>
-            <th>Status</th>
+            <th>Position</th>
             <th>Delete</th>
           </tr>
         </thead>

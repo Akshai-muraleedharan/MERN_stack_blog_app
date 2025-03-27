@@ -23,7 +23,7 @@
                     <p className='text-lg dark:text-white my-3'>{item.comment}</p>
                    <div className='flex justify-end gap-2.5'>
                      {user && item.userId === user.userId  &&  <button onClick={() => editComment(item._id)} className='text-blue-500 cursor-pointer'>edit</button> }
-                     {user && item.userId === user.userId  && commentDeleteLoading ? <button> <span className="loading loading-spinner loading-xs"></span> </button> : user && <button onClick={() => deleteComment(item._id)} className='text-red-500 cursor-pointer'>Delete</button>}
+                     {user && item.userId === user.userId  &&   <button onClick={() => deleteComment(item._id)} className='text-red-500 cursor-pointer'>{commentDeleteLoading ? "Loading..." : "Delete"}</button>}
                    </div>
                 </li>
                </ul>
